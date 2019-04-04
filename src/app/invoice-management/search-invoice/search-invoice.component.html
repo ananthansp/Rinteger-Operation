@@ -1,0 +1,17 @@
+<form [formGroup]="invoiceDetailsForm">
+  <div class="row">
+    <div class="col-md-6 col">
+      <div class="btn">
+        <div class="input-group">
+          <select #selectElem>
+            <option *ngFor="let data of searchType">{{data}}</option>
+          </select>
+          <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #searchValue />
+          <button mat-button type="button" (click)="searchBy(invoiceModel, selectElem.value, searchValue.value)">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

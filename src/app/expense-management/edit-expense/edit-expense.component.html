@@ -1,0 +1,114 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="expenseForm">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Edit expenses</label>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" [readonly]="true" placeholder="Mobile Number" 
+            [ngModel]="expenseEdit?.mobileNumber"
+              (ngModelChange)="expenseEdit.mobileNumber=$event">
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="name" [ngModel]="expenseEdit?.name" (ngModelChange)="expenseEdit.name=$event" placeholder="Name">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="companyName" [ngModel]="expenseEdit?.companyName" (ngModelChange)="expenseEdit.companyName=$event"
+              placeholder="Company Name" required>
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Select Expense Type" formControlName="expenseType" [(ngModel)]="expenseEdit.expenseType"
+             (ngModelChange)="expenseEdit.expenseType=$event" required>
+              <mat-option *ngFor="let type of ExpenseType[0].expenseType" [value]="type">
+                {{type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Select Mode of payments" [(ngModel)]="expenseEdit.modeOfPayment"
+             (ngModelChange)="expenseEdit.modeOfPayment=$event"
+              formControlName="modeOfPayment" required>
+              <mat-option *ngFor="let pay of Paymode[0].modeOfPayment" [value]="pay">
+                {{pay}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="location" [ngModel]="expenseEdit?.location"
+             (ngModelChange)="expenseEdit.location=$event"
+              placeholder="Location" required>
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field>
+            <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="expenseEdit?.date" (ngModelChange)="expenseEdit.date=$event"
+              placeholder="Choose a date" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="totalAmount" type="number" [ngModel]="expenseEdit?.totalAmount" (ngModelChange)="expenseEdit.totalAmount=$event"
+              placeholder="Total Amount" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="paid" type="number" [ngModel]="expenseEdit?.paid" 
+            (ngModelChange)="expenseEdit.paid=$event" placeholder="Paid" required>
+
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="vouNo" [ngModel]="expenseEdit?.vouNo" 
+            (ngModelChange)="expenseEdit.vouNo=$event" placeholder="Voucher No" required>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="expensesDescription" [ngModel]="expenseEdit?.expensesDescription" (ngModelChange)="expenseEdit.expensesDescription=$event"
+              placeholder="Expenses Description" required>
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Select GST Option" [(ngModel)]="expenseEdit.gst" 
+            (ngModelChange)="expenseEdit.gst=$event" formControlName="gst" > 
+              <mat-option *ngFor="let gs of gst" [value]="gs">
+                {{gs}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" class="mt-1">
+          <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+
+          <span fxFlex></span>
+          <span fxFlex></span>
+
+          <button mat-raised-button type="button" color="primary" (click)="updateExpense(expenseForm.valid && expenseEdit)">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

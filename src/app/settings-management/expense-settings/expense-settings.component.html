@@ -1,0 +1,75 @@
+<div class="pageBoxLg">
+  <form [formGroup] = "expenseSettingsForm" style="margin-top:20px;">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="25" class="pr-1">
+        <a (click)="showPaymentForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon>  Payment
+        </a>
+      </div>
+      <div fxFlex="25" class="pr-1">
+        <a (click)="showTypeForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Type
+        </a>
+      </div>
+     <!--  <div fxFlex="25" class="pr-1">
+        <a (click)="showGstForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon>  GST
+        </a>
+      </div>    -->   
+    </div>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+      <div fxFlex="25" class="pr-1" *ngIf="showPayment">
+        <h1>Payment</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="modeOfPayment" placeholder="modeOfPayment" required>
+
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button"  (click)="addExpensePayment()" 
+        [disabled]="!expenseSettingsForm.controls.modeOfPayment.valid">Add</button>
+        <h5>Mode of Payment</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.modeOfPayment ">
+          
+            <p><a (click)="deleteExpensePayment(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div fxFlex="25" class="pr-1" *ngIf="showType">
+        <h1>Expense Type</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="expenseType" placeholder="Expense Type" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary"  type="button" (click)="addExpenseType()" 
+        [disabled]="!expenseSettingsForm.controls.expenseType.valid">Add</button>
+        <h5>Expense Type</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.expenseType ">
+          
+            <p><a (click)="deleteExpenseType(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- <div fxFlex="25" class="pr-1" *ngIf="showGst">
+        <h1>GST</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="gst" placeholder="GST" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addExpenseGst()" type="button" 
+        [disabled]="!expenseSettingsForm.controls.gst.valid">Add</button>
+        <h5>GST</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.gst ">
+          
+            <p><a (click)="deleteExpenseGst(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+        </div>
+      </div>  -->    
+    </div>
+  </form>
+</div>

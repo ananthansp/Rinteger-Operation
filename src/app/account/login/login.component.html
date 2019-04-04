@@ -1,0 +1,40 @@
+<form  [formGroup]="onLoginForm" 
+ (ngSubmit)="loginSubmit()" 
+novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 gridSign mx-auto">
+            <div class="alert alert-danger" *ngIf="loginFailed">
+                Please Enter Valid Details
+            </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="User Name" formControlName="userName" required>
+              <button mat-button matSuffix mat-icon-button aria-label="User Name">
+                <mat-icon>account_circle</mat-icon>
+              </button>
+              
+              <mat-error *ngIf="onLoginForm.controls['userName'].errors?.required">
+                UserName is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password"  type="password" formControlName="password"
+                 required>
+                <button mat-button matSuffix mat-icon-button aria-label="User Name">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                <mat-error *ngIf="onLoginForm.controls['password'].errors?.required">
+                  Password is
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <button mat-raised-button color="accent" type="submit">Sign In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

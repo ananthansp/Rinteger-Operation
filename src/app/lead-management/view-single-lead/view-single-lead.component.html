@@ -1,0 +1,141 @@
+<form novalidate style="padding-top:20px">
+  <label class="pageBoxLg-label">Lead Details</label>
+  <div class="pageBoxLg" *ngFor="let leadData of leadModel; let i = index">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.leadID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.name}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Mobile Number</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.mobileNumber}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Email ID</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+                  : <label class="itemLable">{{leadData.emailId}}</label>
+                </div>
+              </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Date</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.date | date: 'dd/MM/yyyy'}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Remarks</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+                  : <label class="itemLable">{{leadData.remarks}}</label>
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-4  col-6">
+                <div class="form-group">
+                  <label class="divLable">Lead Unit</label>
+                </div>
+              </div>
+              <div class="col-md-8  col-6">
+                <div class="form-group">
+                  : <label class="itemLable">{{leadData.leadUnit}}</label>
+                </div>
+              </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead Owner</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.leadOwner}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead Service</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.leadService}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead Status</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.leadStatus}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Lead Source</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{leadData.leadSource}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Lead Type</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+                  : <label class="itemLable">{{leadData.leadType}}</label>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+    <app-view-requirements [requirementsData]="leadData.requirements"
+    [subTotal]="leadData.subTotal"
+    [allTotal]="leadData.allTotal"
+    [tax]="leadData.tax"
+    ></app-view-requirements>
+    <app-view-followup [followupData]="leadData.followUp"></app-view-followup>
+  </div>
+</form>

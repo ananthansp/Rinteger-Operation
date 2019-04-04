@@ -1,0 +1,49 @@
+<div class="pageBoxLg">
+  <form [formGroup]="taskSettingsForm" style="margin-top:20px;">
+
+<div class="row">
+  <div class="col-md-4">
+    <div  *ngIf="showDepartment">
+      <h1>Department</h1>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="department" placeholder="department" required>
+
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button"  (click)="addDepartment()"
+       [disabled]="!taskSettingsForm.controls.department.valid">Add</button>
+      <h5>Department</h5>
+      <div *ngFor="let data of tasksettingholder ">
+        <div *ngFor="let value of data.department ">
+        
+          <p><a (click)="deleteDepartment(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+  <div class="col-md-4">
+    <div *ngIf="showAssignedby">
+      <h1>Assigned By</h1>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="assignedBy" placeholder="assignedBy" required>
+
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button"  (click)="addAssignedby()"
+       [disabled]="!taskSettingsForm.controls.assignedBy.valid">Add</button>
+      <h5>Assigned By</h5>
+      <div *ngFor="let data of tasksettingholder ">
+        <div *ngFor="let value of data.assignedBy ">
+        
+          <p><a (click)="deleteAssignedby(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+</div>

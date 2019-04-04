@@ -1,0 +1,183 @@
+<form [formGroup]="expenseDetailsForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="btn">
+          <a (click)="addExpense()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+        </div>
+        
+        <div class="col-1">
+          <div class="btn pr-1 col-12" fxFlex="50">
+            <div class="input-group ">
+              <select style="width: 150px;" #selectElem placeholder="Expense Type" (change)=SearchByType($event.target.value)>
+                <option *ngFor="let data of ExpenseType" [value]="data">{{data}}</option>
+              </select></div>   
+              <div>
+                <button mat-stroked-button color="primary" (click)="getAllExpense()" type="submit">Refresh</button>
+              </div>            
+          </div>
+        </div>
+          <div class='col'>
+          <app-search [expenseModel]="expenseval"(searchCustomer)="filterExpense($event)"></app-search>
+        </div>
+      
+        
+        <div class="col-4">
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <input matInput formControlName="fromDate" [matDatepicker]="picker" 
+              placeholder="Starting Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput formControlName="toDate" [matDatepicker]="picker1" 
+              placeholder="Ending Date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-1">
+
+            <button mat-button (click)="searchByDate(expenseDetailsForm)" type="submit"><mat-icon>search</mat-icon></button>
+          </div>
+        </div>
+        <div class="col-1">
+          <button mat-button class="primary" (click)="findTDS()" type="submit">TDS</button>
+          <button mat-button class="primary" (click)="findGST()" type="submit">GST</button>
+        </div>
+       
+        <div class="bor col-md-2">
+
+          Total : {{getTotal()}}
+          <br> Paid : {{getPaid()}}
+          <br> Balance : {{getBalance()}}
+
+        </div>
+      </div>
+      <div class="row gridRowHeader display-none-small">
+
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Name</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>companyName</label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Expense Type</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Date of Expense</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Total Amount</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Paid</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Balance</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Action</label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of expenseModel">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Name:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.name}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Company Name:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.companyName}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">expenseType:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.expenseType}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Date of Expense:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.date | date: 'dd/MM/yyyy'}}
+          </div>
+
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Total Amount:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.totalAmount}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Paid:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.paid}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Balance:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.balance}}
+          </div>
+
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getViewExpense(data)">
+                View
+              </a>
+              <a class="nav-link" (click)="getEditExpense(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteExpense(data)">
+                Delete
+              </a>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+</form>

@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" [ngClass]="this.navheaderService?.menuHide">
+  <a class="navbar-brand" [routerLink]="['/dashboard/menu']">
+    <img class="image-fluid" src="../../../assets/images/logo.jpg">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown" *ngFor="let cust of this.navheaderService?.getItems?.marketingRole">
+        <a class="nav-link dropdown-toggle textMenu" *ngIf="cust.customerNav" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: true}">
+          Customers
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/customers/viewcustomer']" *ngIf="cust.customerNav">Customer DB</a>
+          <a class="dropdown-item" [routerLink]="['/customers/viewmarket']" *ngIf="cust.customerNav">Market DB</a>
+          <a class="dropdown-item" [routerLink]="['/customers/viewsubscribe']" *ngIf="cust.bookingNav">Subscribe DB</a>
+        </div>
+      </li>
+      <li class="nav-item" *ngFor="let cust of this.navheaderService?.getItems?.marketingRole">
+        <a class="nav-link textMenu" [routerLink]="['/lead/leadview']" *ngIf="cust.leadNav">Leads</a>
+      </li>
+      <li class="nav-item" *ngFor="let cust  of this.navheaderService?.getItems?.marketingRole">
+        <a class="nav-link textMenu" [routerLink]="['/workorder/viewallworkorder']"
+          *ngIf="cust.workordersNav">WorkOrders</a>
+      </li>
+      <li class="nav-item" *ngFor="let cust  of this.navheaderService?.getItems?.marketingRole">
+        <a class="nav-link textMenu" [routerLink]="['/quotation/viewallquotation']"
+          *ngIf="cust.quotationNav">Quotation</a>
+      </li>
+      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.financialRole">
+        <a class="nav-link textMenu" *ngIf="fin.invoiceNav" [routerLink]="['/invoice/viewallinvoice']">Invoice</a>
+      </li>
+      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.materialRole">
+        <a class="nav-link textMenu" *ngIf="fin.materialNav" [routerLink]="['/material/front']">Material</a>
+      </li>
+      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.financialRole">
+        <a class="nav-link textMenu" *ngIf="fin.expenseNav" [routerLink]="['/expense/viewExpense']">Expense</a>
+      </li>
+      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.financialRole">
+        <a class="nav-link textMenu" *ngIf="fin.incomeNav" [routerLink]="['/income/viewincome']">Income</a>
+      </li>
+      <li class="nav-item" *ngFor="let fin of this.navheaderService?.getItems?.financialRole">
+        <a class="nav-link textMenu" *ngIf="fin.profomaInvoiceNav"
+          [routerLink]="['/proformainvoice/viewallproformainvoice']">Profoma Invoice</a>
+      </li>
+      <li class="nav-item dropdown" *ngFor="let adm of this.navheaderService?.getItems?.adminRole">
+        <a class="nav-link dropdown-toggle textMenu" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" *ngIf="adm.settingNav">
+          Settings
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/settings/leadsettings']">Lead Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/workorderpdf']">PDF Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/expensesetting']">Expense Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/incomesetting']">Income Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/ticketsetting']">Ticket Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/materialsetting']">Material Settings</a>
+          <a class="dropdown-item" [routerLink]="['/settings/tasksetting']">Task Settings</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngFor="let adm of this.navheaderService?.getItems?.adminRole">
+        <a class="nav-link dropdown-toggle textMenu" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" *ngIf="adm.settingNav" aria-expanded="false">
+          user Management
+        </a>
+        <div *ngIf="adm.settingNav" class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/user/register']">Register</a>
+          <a class="dropdown-item" [routerLink]="['/user/rolecreate']">Role Create</a>
+        </div>
+      </li>
+      <li class="nav-item" *ngFor="let ticket of this.navheaderService?.getItems?.baseRole">
+
+        <a class="nav-link textMenu" *ngIf="ticket?.ticketNav" (click)="getTicket()">Ticket</a>
+      </li>
+      <li class="nav-item" *ngFor="let base of this.navheaderService?.getItems?.baseRole">
+        <a class="nav-link textMenu" *ngIf="base?.taskNav" (click)="getTask()">Task</a>
+      </li>
+      <li class="nav-item " *ngFor="let adm of this.navheaderService?.getItems?.adminRole">
+        <a class="nav-link textMenu" *ngIf="adm?.uploadNav" [routerLink]="['/customers/upload']">Upload</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link textMenu" (click)="logOutSession()"> LogOut</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>

@@ -1,0 +1,188 @@
+<div class="pageBoxLg">
+  <form [formGroup]="leadDetailsForm" (ngSubmit)="updateLeads(leadDetailsForm, leadModel)">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="leadID" placeholder="Lead ID" readonly [ngModel]="leadModel?.leadID">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="mobileNumber" placeholder="Mobile Number" readonly [ngModel]="leadModel?.mobileNumber">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="name" placeholder="Name" readonly [ngModel]="leadModel?.name">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="emailId" placeholder="Email ID" readonly [ngModel]="leadModel?.emailId">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="Select Lead Unit" [(ngModel)]="leadModel.leadUnit" formControlName="leadUnit">
+            <mat-option *ngFor="let lead of fullLeadUnit" [value]="lead">
+              {{lead}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="leadOwner" [ngModel]="leadModel.leadOwner" placeholder="Lead Owner">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="Select Lead Source" [(ngModel)]="leadModel.leadSource" formControlName="leadSource">
+            <mat-option *ngFor="let lead of fullLeadSource" [value]="lead">
+              {{lead}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Select Lead Status" [(ngModel)]="leadModel.leadStatus" formControlName="leadStatus">
+            <mat-option *ngFor="let lead of fullLeadStatus" [value]="lead">
+              {{lead}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Select Service" [(ngModel)]="leadModel.leadService" formControlName="service" multiple>
+            <mat-option *ngFor="let lead of fullLeadService" [value]="lead">
+              {{lead}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="requirements" [ngModel]="data.requirements" (ngModelChange)="data.requirements=$event"
+                placeholder="Requirements">
+            </mat-form-field>
+          </div> -->
+      <!--  <div class="row">
+              <div class="form-group">
+                <label class="labelHeader">Requirements</label>
+              </div>
+            </div> -->
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="leadModel.date" (ngModelChange)="leadModel.date=$event"
+            placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="remarks" [ngModel]="leadModel.remarks" (ngModelChange)="leadModel.remarks=$event" placeholder="Remarks">
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Lead Type" [(ngModel)]="leadModel.leadType" multiple formControlName="leadType">
+            <mat-option *ngFor="let lead of fullLeadType" [value]="lead">
+              {{lead}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="100" class="textHeader">
+        <h5>Requirements</h5>
+      </div>
+      <div fxFlex="100" formArrayName="requirements">
+        <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i">
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="item" placeholder="item">
+            </mat-form-field>
+          </div>
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="quantity" placeholder="Quantity">
+            </mat-form-field>
+          </div>
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="price" placeholder="Price">
+            </mat-form-field>
+          </div>
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="discount" placeholder="Discount">
+            </mat-form-field>
+          </div>
+          <div fxFlex="15" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="description" placeholder="Description">
+            </mat-form-field>
+          </div>
+          <div fxFlex="20" class="pr-1">
+            <mat-form-field class="full-width">
+              <!-- {{qty*price}} -->
+              <input matInput formControlName="total" placeholder="Total" [ngModel]="(leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                      leadDetailsForm.controls['requirements'].controls[i].controls.price.value
+                        ) - (leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                        leadDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*leadDetailsForm.controls['requirements'].controls[i].controls.discount.value">
+            </mat-form-field>
+          </div>
+
+          <a (click)="deleteRequirements(i)"><mat-icon>clear</mat-icon></a>
+        </div>
+      </div>
+
+      <div class="btn">
+        <a (click)="addForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon>Add Requirements
+        </a>
+      </div>
+      <div fxFlex="100" class="textHeader">
+        <h5>Follow Up</h5>
+      </div>
+      <div fxFlex="100" formArrayName="followUp">
+        <div *ngFor="let phone of followUpForms.controls; let i=index" [formGroupName]="i">
+          <div fxFlex="20" class="pr-1">
+            <input type="text" hidden formControlName="id" #id>
+            <mat-form-field>
+              <input matInput formControlName="date" [matDatepicker]="picker1" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex="20" class="pr-1">
+            <mat-form-field>
+              <input matInput formControlName="upcomingDate" [matDatepicker]="picker2" placeholder="Choose a Upcoming date">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex="20" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="remarks" placeholder="Remarks" #remarks>
+            </mat-form-field>
+          </div>
+          <!-- <a (click)="addFollowUps(i)"><mat-icon>save</mat-icon></a> -->
+          <a (click)="deleteFollowUps(i)"><mat-icon>clear</mat-icon></a>
+        </div>
+      </div>
+      <div class="btn">
+        <a (click)="followUpForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon>Add Follow Up
+        </a>
+      </div>
+      <div fxFlex="100" class="mt-1">
+        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        <span fxFlex></span>
+        <button mat-raised-button color="primary">Update</button>
+      </div>
+    </div>
+  </form>
+</div>

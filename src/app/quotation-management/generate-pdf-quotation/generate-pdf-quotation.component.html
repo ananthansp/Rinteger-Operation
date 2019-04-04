@@ -1,0 +1,17 @@
+<form [formGroup]="singleQuotationDetailsForm">
+  <div class="col-md-6">
+    <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
+      <input type="radio" formControlName="termsType" [value]="terms">&nbsp;&nbsp;{{ terms}}
+    </label>
+    <mat-form-field>
+      <mat-select #tempVal placeholder="Select the template">
+        <mat-option *ngFor="let val of templates" [value]="val">
+          {{val}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>
+<button mat-raised-button 
+(click)="viewSingleQuotationPdf(quotationDetails, customer, companyDetails, tempVal.value)"
+  color="accent" type="button">Download PDF</button>

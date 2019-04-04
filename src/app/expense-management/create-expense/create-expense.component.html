@@ -1,0 +1,131 @@
+<div class="container topAlignContainer">
+  <form [formGroup]="expenseDetailsForm" (ngSubmit)="expenseDetailsForm.valid && addSingleExpense(expenseDetailsForm)">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="100">
+        <label class="pageBoxLg-label">Create Expense</label>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <div *ngIf="!data">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="mobileNumber" type="tel" placeholder="Mobile Number" >
+          <mat-error *ngIf="expenseDetailsForm.controls['mobileNumber'].errors?.required" >
+            Enter Mobile Number
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="expenseDetailsForm.controls['name'].errors?.required" >
+            Enter Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="companyName" placeholder="Company Name">
+          <mat-error *ngIf="expenseDetailsForm.controls['companyName'].errors?.required">
+            Enter Company Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Select Expense Type" formControlName="expenseType">
+            <mat-option *ngFor="let expense of ExpenseType[0].expenseType" [value]="expense">
+              {{expense}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Select Mode of payments" formControlName="modeOfPayment">
+            <mat-option *ngFor="let expense of Paymode[0].modeOfPayment" [value]="expense">
+              {{expense}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <input matInput formControlName="location" placeholder="location">
+        
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="totalAmount" type="number" placeholder="TotalAmount" required>
+
+          <mat-error *ngIf="expenseDetailsForm.controls['totalAmount'].errors?.required">
+            Enter Total Amount
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="paid" type="number" placeholder="Paid" required>
+          <mat-error *ngIf="expenseDetailsForm.controls['paid'].errors?.required">
+            Enter paid Amount
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="vouNo" placeholder="Voucher.No" required>
+          <mat-error *ngIf="expenseDetailsForm.controls['vouNo'].errors?.required">
+            Enter Voucher.no
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+
+
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="expensesDescription" placeholder="Expense Description" required>
+          <mat-error *ngIf="expenseDetailsForm.controls['expensesDescription'].errors?.required">
+            Enter Expense Description
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Select GST option" formControlName="gst">
+            <mat-option *ngFor="let gs of gst" [value]="gs">
+              {{gs}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+      <div fxFlex="100" class="mt-1">
+        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        <span fxFlex></span>
+        <button mat-raised-button color="primary">Save</button>
+        
+      </div>
+    </div>
+  </form>
+</div>

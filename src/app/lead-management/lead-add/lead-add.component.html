@@ -1,0 +1,436 @@
+<div class="container-fluid">
+  <!-- <form [formGroup]="leadDetailsForm">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="25">
+        <div class="mt-5">
+          <label class="labelHeader">Create Lead</label>
+        </div>
+        <a (click)="leadCreate()">
+          <mat-icon class="gridEdit">add_box</mat-icon>
+        </a>
+      </div>
+      <div fxFlex="25">
+
+      </div>
+      <div fxFlex="50">
+        <div class="mt-5">
+          <label class="labelHeader">Existing Customer</label>
+        </div>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Existing Customer Mobile Number"
+           formControlName="checkMobileNumber" #mobi>
+        </mat-form-field>
+        <button (click)="selectedCustomer(mobi.value)" 
+        mat-raised-button color="primary">Click</button>
+        <div *ngIf="exitsCustomerCheck">
+          <div class="alert alert-success">
+            <strong>Existing Customer</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form> -->
+    <div class="pageBoxLg">
+      <form [formGroup]="leadDetailsForm" (ngSubmit)="leadDetailsForm.valid && addSingleLead(leadDetailsForm)">
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="50" class="pr-1" *ngIf="!showMobileNumber">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="mobileNumber" placeholder="Mobile Number">
+              <mat-error *ngIf="leadDetailsForm.controls['mobileNumber'].errors?.required">
+                Enter Mobile No 
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <a (click)="existingCustomer()">
+              <mat-icon class="gridEdit">add_box</mat-icon>
+            </a>
+          </div>
+          <div fxFlex="50" class="pr-1" *ngIf="!showMobileNumber">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="name" placeholder="Name">
+              <mat-error *ngIf="leadDetailsForm.controls['name'].errors?.required">
+                Enter Name
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1" *ngIf="showMobileNumber">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="mobileNumber"
+              (ngModelChange)="existingMobileNumber=$event"
+              [ngModel]="existingMobileNumber" placeholder="Mobile Number">
+              <mat-error *ngIf="leadDetailsForm.controls['mobileNumber'].errors?.required">
+                Enter Mobile No 
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <a (click)="existingCustomer()">
+              <mat-icon class="gridEdit">add_box</mat-icon>
+            </a>
+          </div>
+          <div fxFlex="50" class="pr-1" *ngIf="showMobileNumber">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="name" 
+              (ngModelChange)="existingName=$event" placeholder="Name" 
+              [ngModel]="existingName"
+              >
+              <mat-error *ngIf="leadDetailsForm.controls['name'].errors?.required">
+                Enter Name
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1"  *ngIf="!showMobileNumber">
+              <mat-form-field class="full-width">
+                <input matInput formControlName="emailId" placeholder="Email ID">
+                <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
+                  Enter Email ID
+                  <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="50" class="pr-1" *ngIf="showMobileNumber">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="emailId" 
+                  (ngModelChange)="existingEmail=$event" placeholder="emailId" 
+                  [ngModel]="existingEmail"
+                  >
+                  <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
+                    Enter Name
+                    <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            <div fxFlex="50" class="pr-1">
+              <mat-form-field class="full-width">
+                <mat-select placeholder="Lead Unit" formControlName="leadUnit">
+                  <mat-option *ngFor="let data of fullLeadUnit" [value]="data">
+                    {{data}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="leadOwner" placeholder="Lead Owner">
+              <mat-error *ngIf="leadDetailsForm.controls['leadOwner'].errors?.required">
+                Enter Lead Owner
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <mat-select placeholder="Select Lead Source" formControlName="leadSource">
+                <mat-option *ngFor="let data of fullLeadSource" [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <mat-select placeholder="Lead Status" formControlName="leadStatus">
+                <mat-option *ngFor="let data of fullLeadStatus" [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Lead Service" formControlName="service" multiple>
+                <mat-option *ngFor="let data of fullLeadService" [value]="data">
+                  {{data}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+                <mat-select placeholder="Lead Type" formControlName="leadType" multiple>
+                    <mat-option *ngFor="let data of fullLeadType" [value]="data">
+                      {{data}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="remarks" placeholder="Remarks">
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" class="textHeader">
+            <h5>Requirements</h5>
+          </div>
+          <div (keyup)="getTotal()" fxLayout="column" fxFlex="100" formArrayName="requirements">
+            <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i">
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="item"  placeholder="item">
+                </mat-form-field>
+              </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="quantity" placeholder="Quantity">
+                </mat-form-field>
+              </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="price" placeholder="Price">
+                </mat-form-field>
+              </div>
+
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="discount" placeholder="Discount %">
+                </mat-form-field>
+              </div>
+              <div fxFlex="15" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="total" [ngModel]="(leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                  leadDetailsForm.controls['requirements'].controls[i].controls.price.value
+                    ) - (leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                    leadDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*leadDetailsForm.controls['requirements'].controls[i].controls.discount.value"
+                    placeholder="Total">
+                </mat-form-field>
+              </div>
+              <div fxFlex="25" class="pr-1">
+                <mat-form-field class="full-width">
+                  <input matInput formControlName="description" placeholder="Description">
+                </mat-form-field>
+              </div>
+              <a (click)="deleteRequirements(i)">
+                <mat-icon>clear</mat-icon>
+              </a>
+            </div>
+          </div>
+          <div fxFlex="100">
+            <div fxFlex="50">
+              <a (click)="addForm()">
+                <mat-icon class="gridEdit">add_box</mat-icon>
+              </a>
+              <p>Add New</p>
+            </div>
+            <div fxFlex="50">
+              <div class="pageBoxLg">
+                <div class="row">
+                  <div class="col-md-6 col-6">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="subTotal" [readonly]="true" placeholder="Sub Total" [ngModel]="sum">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 col-6">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="tax" [readonly]="true" placeholder="Tax">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-12 col-12">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="allTotal"
+                       [readonly]="true" placeholder="Total" [ngModel]="sum">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div fxFlex="100" class="mt-1">
+
+            <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+            <span fxFlex></span>
+            <button mat-raised-button color="primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  <!-- <div *ngIf="exitsCustomerCheck">
+    <div *ngFor="let customer of customerModel;">
+      <div [hidden]="!customer?.showDetail">
+        <div class="col-xs-12 col-md-12">
+          <div class="pageBoxLg">
+            <form [formGroup]="leadDetailsForm" (ngSubmit)="addExistingSingleLead(leadDetailsForm, customer)">
+              <div fxLayout="row wrap" fxLayout.lt-sm="column">
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="mobileNumber" maxlength="10" [value]="customer.mobileNumber"
+                      placeholder="Mobile Number">
+                    <mat-error *ngIf="leadDetailsForm.controls['mobileNumber'].errors?.required">
+                      Enter Mobile No
+                      <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="name" placeholder="Name" [value]="customer.name">
+                    <mat-error *ngIf="leadDetailsForm.controls['name'].errors?.required">
+                      Enter Name
+                      <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="50" class="pr-1">
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="emailId" placeholder="Email ID" [value]="customer.emailId">
+                      <mat-error *ngIf="leadDetailsForm.controls['emailId'].errors?.required">
+                        Enter Email ID
+                        <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="leadOwner" placeholder="Lead Owner">
+                    <mat-error *ngIf="leadDetailsForm.controls['leadOwner'].errors?.required">
+                      Enter Lead Owner
+                      <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field>
+                    <mat-select placeholder="Select Lead Source" formControlName="leadSource">
+                      <mat-option *ngFor="let data of fullLeadSource" [value]="data">
+                        {{data}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field>
+                    <mat-select placeholder="Lead Status" formControlName="leadStatus">
+                      <mat-option *ngFor="let data of fullLeadStatus" [value]="data">
+                        {{data}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <mat-select placeholder="Lead Service" formControlName="service" multiple>
+                      <mat-option *ngFor="let data of fullLeadService" [value]="data">
+                        {{data}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field>
+                    <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="50" class="pr-1">
+                    <mat-form-field class="full-width">
+                        <mat-select placeholder="Lead Type" formControlName="leadType"    multiple >
+                            <mat-option *ngFor="let data of fullLeadType" [value]="data">
+                              {{data}}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                  </div>
+                <div fxFlex="50" class="pr-1">
+                  <mat-form-field class="full-width">
+                    <input matInput formControlName="remarks" placeholder="Remarks">
+                  </mat-form-field>
+                </div>
+                <div fxFlex="100" class="textHeader">
+                  <h5>Requirements</h5>
+                </div>
+                <div (keyup)="getTotal()" fxLayout="column" fxFlex="100" formArrayName="requirements">
+                  <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i">
+                    <div fxFlex="15" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="item" placeholder="item">
+                      </mat-form-field>
+                    </div>
+                    <div fxFlex="15" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="quantity" placeholder="Quantity">
+                      </mat-form-field>
+                    </div>
+                    <div fxFlex="15" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="price" placeholder="Price">
+                      </mat-form-field>
+                    </div>
+
+                    <div fxFlex="15" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="discount" placeholder="Discount %">
+                      </mat-form-field>
+                    </div>
+                    <div fxFlex="15" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="total" [ngModel]="(leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                      leadDetailsForm.controls['requirements'].controls[i].controls.price.value
+                        ) - (leadDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+                        leadDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*leadDetailsForm.controls['requirements'].controls[i].controls.discount.value"
+                          placeholder="Total">
+                      </mat-form-field>
+                    </div>
+                    <div fxFlex="25" class="pr-1">
+                      <mat-form-field class="full-width">
+                        <input matInput formControlName="description" placeholder="Description">
+                      </mat-form-field>
+                    </div>
+                    <a (click)="deleteRequirements(i)">
+                      <mat-icon>clear</mat-icon>
+                    </a>
+                  </div>
+                </div>
+                <div fxFlex="100">
+                  <div fxFlex="50">
+                    <a (click)="addForm()">
+                      <mat-icon class="gridEdit">add_box</mat-icon>
+                    </a>
+                    <p>Add New</p>
+                  </div>
+                  <div fxFlex="50">
+                    <div class="pageBoxLg">
+                      <div class="row">
+                        <div class="col-md-6 col-6">
+                          <mat-form-field class="full-width">
+                            <input matInput formControlName="subTotal" [readonly]="true" placeholder="Sub Total"
+                              [ngModel]="sum">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-6 col-6">
+                          <mat-form-field class="full-width">
+                            <input matInput formControlName="tax" [readonly]="true" placeholder="Tax">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-12 col-12">
+                          <mat-form-field class="full-width">
+                            <input matInput formControlName="allTotal" [readonly]="true" placeholder="Total" [ngModel]="sum">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div fxFlex="100" class="mt-1">
+
+                  <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+                  <span fxFlex></span>
+                  <button mat-raised-button color="primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->

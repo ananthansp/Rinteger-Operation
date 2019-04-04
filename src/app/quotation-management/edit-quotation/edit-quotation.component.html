@@ -1,0 +1,201 @@
+<form novalidate [formGroup]="quotationDetailsForm"
+ (ngSubmit)="updateQuotation(quotationDetailsForm)" 
+style="padding-top:20px">
+  <label class="pageBoxLg-label">Edit Quotation</label>
+  <div class="pageBoxLg">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Customer ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">
+                <input hidden formControlName="customerID"
+                 [ngModel]="quotation?.customerID">
+                {{quotation?.customerID}}
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              <input hidden  formControlName="companyName" [ngModel]="quotation?.companyName">
+              : <label class="itemLable">{{quotation?.companyName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Company Address</label>
+              </div>
+            </div>
+            <div class="col-md-8  col-6">
+                <div class="form-group">
+      <input hidden  formControlName="address" [ngModel]="quotation?.companyAddress">
+                  : <label class="itemLable">{{quotation?.companyAddress}}</label>
+                </div>
+              </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Customer Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              <input  hidden formControlName="customerName" [ngModel]="quotation?.customerName">
+              : <label class="itemLable">{{quotation?.customerName}}</label>
+            </div>
+          </div>
+
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Mobile Number</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{quotation?.mobileNumber}}</label>
+              <input hidden  formControlName="mobileNumber" [ngModel]="quotation?.mobileNumber">
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+              <div class="form-group">
+                <label class="divLable">Email ID</label>
+              </div>
+            </div>
+          <div class="col-md-8  col-6">
+              <div class="form-group">
+                : <label class="itemLable">{{quotation?.emailId}}</label>
+                <input hidden  formControlName="emailId" [ngModel]="quotation?.emailId">
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">WorkOrder ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              <input  hidden formControlName="quotationID" [ngModel]="quotation?.quotationID">
+              : <label class="itemLable">{{quotation?.quotationID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Date</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              <mat-form-field>
+                <input matInput formControlName="date" [matDatepicker]="picker" [ngModel]="quotation?.date" 
+                 placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+          <input hidden formControlName="date" [ngModel]="quotation?.date" placeholder="item">
+          <input hidden formControlName="leadID" [ngModel]="quotation?.leadID" placeholder="item">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label class="labelHeader">Requirements</label>
+      </div>
+    </div>
+    <div (keyup)="getTotal()" formArrayName="requirements">
+      <div *ngFor="let account of requirementsForms.controls; let i=index" [formGroupName]="i" class="row">
+        <div class="col-md-1 col-4">
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="item" placeholder="item">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-1 col-4">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="quantity" placeholder="Quantity">
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 col-4">
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="price" placeholder="price">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-2 col-4">
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="discount" placeholder="Discount">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-2 col-4">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="total" [ngModel]="(quotationDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+            quotationDetailsForm.controls['requirements'].controls[i].controls.price.value
+              ) - (quotationDetailsForm.controls['requirements'].controls[i].controls.quantity.value *
+              quotationDetailsForm.controls['requirements'].controls[i].controls.price.value)/100*quotationDetailsForm.controls['requirements'].controls[i].controls.discount.value"
+              placeholder="Total">
+          </mat-form-field>
+        </div>
+        <div class="col-md-2 col-2">
+          <div class="form-group">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="description" placeholder="Description">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-2 col-2">
+          <div class="form-group">
+            <a (click)="deleteRequirements(i)">
+              <mat-icon>clear</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <a (click)="addNewForm()">
+        <mat-icon class="gridEdit">add_box</mat-icon>
+      </a>
+    </div>
+    <div class="offset-md-6 col-md-6">
+      <div class="pageBoxLg">
+        <div class="row">
+          <div class="col-md-6 col-6">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="subTotal" [readonly]="true" placeholder="Sub Total" [ngModel]="sum">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6 col-6">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="tax" [readonly]="true" placeholder="Tax">
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 col-12">
+            <mat-form-field class="full-width">
+              <input matInput formControlName="allTotal" [readonly]="true" placeholder="Total" [ngModel]="sum">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-raised-button color="primary">Update</button>
+  </div>
+</form>

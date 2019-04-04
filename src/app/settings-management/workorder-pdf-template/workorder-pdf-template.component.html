@@ -1,0 +1,289 @@
+<div class="pageBoxLg">
+  <form [formGroup]="workOrderPdfForm" style="margin-top:20px;">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="12.50" class="pr-1">
+        <a (click)="addGstForm()">
+          <mat-icon>add_box</mat-icon> GST
+        </a>
+      </div>
+      <div fxFlex="12.50" class="pr-1">
+          <a (click)="addSGstForm()">
+            <mat-icon>add_box</mat-icon> SGST
+          </a>
+        </div>
+        <div fxFlex="12.50" class="pr-1">
+            <a (click)="addCGstForm()">
+              <mat-icon>add_box</mat-icon> CGST
+            </a>
+          </div>
+      <div fxFlex="12.50" class="pr-1">
+        <a (click)="termsForm()">
+          <mat-icon>add_box</mat-icon>Production Terms & Condition
+        </a>
+      </div>
+      <div fxFlex="12.50" class="pr-1">
+          <a (click)="digitalTermsForm()">
+            <mat-icon>add_box</mat-icon>Digital Marketing Terms & Condition 
+          </a>
+        </div>
+      <div fxFlex="12.50" class="pr-1">
+        <a (click)="bankForm()">
+          <mat-icon>add_box</mat-icon> Bank Details
+        </a>
+      </div>
+      <div fxFlex="12.50" class="pr-1">
+        <a (click)="companyForm()">
+          <mat-icon>add_box</mat-icon> Company Details
+        </a>
+      </div>
+      <div fxFlex="12.50" class="pr-1">
+        <a (click)="footerForm()">
+          <mat-icon>add_box</mat-icon> Footer Details
+        </a>
+      </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showgstForm">
+
+      <div fxFlex="20" class="pr-1">
+
+        <div>
+          <label>GST %</label>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="gst" placeholder="GST">
+
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" (click)="addGST(workOrderPdfForm)">Add</button>
+      </div>
+      <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+        <label> GST : </label>
+        {{data.gst}}
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showsgstForm">
+
+        <div fxFlex="20" class="pr-1">
+  
+          <div>
+            <label>SGST %</label>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="sgst" placeholder="SGST">
+  
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary" (click)="addSGST(workOrderPdfForm)">Add</button>
+        </div>
+        <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+          <label> SGST : </label>
+          {{data.sgst}}
+        </div>
+      </div>
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showcgstForm">
+
+          <div fxFlex="20" class="pr-1">
+    
+            <div>
+              <label>CGST %</label>
+              <mat-form-field class="full-width">
+                <input matInput formControlName="cgst" placeholder="CGST">
+    
+              </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary" (click)="addCGST(workOrderPdfForm)">Add</button>
+          </div>
+          <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+            <label> CGST : </label>
+            {{data.cgst}}
+          </div>
+        </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showtermsForm">
+      <div fxFlex="20" class="pr-1">
+        <label>Production Terms & Condition</label>
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Comment" formControlName="terms">
+         </textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addTerms(workOrderPdfForm)">Add</button>
+      </div>
+      <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+        <label>Production Terms & Condition : </label>
+        {{data.terms}}
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showDigitaltermsForm">
+        <div fxFlex="20" class="pr-1">
+          <label>Digital Marketing Terms & Condition</label>
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Comment" formControlName="digitalterms">
+           </textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addDigtalTerms(workOrderPdfForm)">Add</button>
+        </div>
+        <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+          <label>Digital Marketing Terms & Condition : </label>
+          {{data.digitalterms}}
+        </div>
+      </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showcompanyDetailsForm">
+      <div fxFlex="20" class="pr-1">
+        <label>Company Details</label>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="companyName" placeholder="Company Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="tax" placeholder="TAX">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="pan" placeholder="PAN">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="sac" placeholder="SAC">
+
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="address" placeholder="Address">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="pincode" placeholder="Pincode">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="phNo" placeholder="Phone Number">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addCompanyDetails(workOrderPdfForm)">Add</button>
+      </div>
+      <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+        <div *ngFor="let val of data.companydetails">
+          <div>
+            <label> Company Name :</label>
+            {{val.companyName}}
+          </div>
+          <div>
+            <label> TAX:</label>
+            {{val.TAX}}
+          </div>
+          <div>
+            <label> PAN:</label>
+            {{val.PAN}}
+          </div>
+          <div>
+            <label> SAC:</label>
+            {{val.SAC}}
+          </div>
+          <div>
+            <label> Address:</label>
+            {{val.address}}
+          </div>
+          <div>
+            <label> Pincode:</label>
+            {{val.pincode}}
+          </div>
+          <div>
+            <label> Phone Number:</label>
+            {{val.phNo}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column"  *ngIf="showbankDetailsForm">
+      <div fxFlex="20" class="pr-1" >
+        <label>Bank Details</label>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="accountname" placeholder="Account Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="accountnumber" placeholder="Account Number">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="bankname" placeholder="Bank Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="branchname" placeholder="Branch Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="accounttype" placeholder="Account Type">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="ifsc" placeholder="IFSC ">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addBankDetails(workOrderPdfForm)">Add</button>
+      </div>
+      <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+          <div *ngFor="let val of data.bankdetails">
+            <div>
+              <label> Account Name :</label>
+              {{val.accName}}
+            </div>
+            <div>
+              <label> Account Number:</label>
+              {{val.accNo}}
+            </div>
+            <div>
+              <label> Bank Name:</label>
+              {{val.bankName}}
+            </div>
+            <div>
+              <label> Branch Name:</label>
+              {{val.branchName}}
+            </div>
+            <div>
+              <label> Account Type:</label>
+              {{val.accountType}}
+            </div>
+            <div>
+              <label> IFSC:</label>
+              {{val.IFSC}}
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div fxLayout="row wrap" fxLayout.lt-sm="column" *ngIf="showfooterDetailsForm">
+      <div fxFlex="20" class="pr-1" >
+        <label>Footer Details</label>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="footerCompanyName" placeholder="Company Name">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="footerAddress" placeholder="Address">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="website" placeholder="Website">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="emailId" placeholder="Email ID">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="footerPhNo" placeholder="Phone Number">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addFooterDetails(workOrderPdfForm)">Add</button>
+      </div>
+      <div fxFlex="33" class="pr-1 pageBoxLg" *ngFor="let data of workOrderModel">
+          <div *ngFor="let val of data.footerdetails">
+            <div>
+              <label> Company Name :</label>
+              {{val.companyName}}
+            </div>
+            <div>
+              <label> Address:</label>
+              {{val.address}}
+            </div>
+            <div>
+              <label> Website:</label>
+              {{val.website}}
+            </div>
+            <div>
+              <label> Email ID:</label>
+              {{val.emailId}}
+            </div>
+            <div>
+              <label> Phone Number:</label>
+              {{val.phNo}}
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  </form>
+</div>

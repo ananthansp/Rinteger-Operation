@@ -1,0 +1,15 @@
+<form [formGroup]="materialDetailsForm">
+    <div class="row">
+      <div class="col-md-12 col">
+        <div class="btn">
+          <div class="input-group">           
+            <input type="text" class="form-control" placeholder="Search" formControlName="srchterm"
+             #searchValue />
+            <button mat-button type="submit" (click)="searchBy(materialModel, searchValue.value)">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

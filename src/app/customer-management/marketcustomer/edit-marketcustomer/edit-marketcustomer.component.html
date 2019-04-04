@@ -1,0 +1,59 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="marketCustomerDetailsForm">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Edit Customer</label>
+        </div>
+
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" [readonly]="true" placeholder="Mobile Number" [value]="marketEdit?.mobileNumber || null"
+              (ngModelChange)="marketEdit.mobileNumber=$event">
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="name" [value]="marketEdit?.name || null" (ngModelChange)="marketEdit.name=$event" placeholder="Name">
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="emailId" [value]="marketEdit?.emailId || null" (ngModelChange)="marketEdit.emailId=$event"
+              placeholder="Email Id">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="location" [value]="marketEdit?.location  || null" (ngModelChange)="marketEdit.location=$event || null"
+              placeholder="Location">
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="whatsAppNo" [value]="marketEdit?.whatsAppNo || null" (ngModelChange)="marketEdit.whatsAppNo=$event"
+              placeholder="whatsAppNo">
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="landLine" [value]="marketEdit?.landLine || null" (ngModelChange)="marketEdit.landLine=$event"
+              placeholder="landLine">
+
+
+          </mat-form-field>
+        </div>
+        <div fxFlex="100" class="mt-1">
+          <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+          <span fxFlex></span>
+          <span fxFlex></span>
+          <button mat-raised-button type="button" color="primary" (click)="updateMarketCustomer(marketEdit)">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,190 @@
+<form style="padding-top:20px">
+  <label class="pageBoxLg-label">All work Orders</label>
+  <div class="pageBoxLg">
+    <app-search-workorder [workOrderModel]="workOrderModel" (searchWorkOrder)="filterWorkOrder($event)">
+    </app-search-workorder>
+    <div class="row">
+      <div class="col-sm-8">
+        <form [formGroup]="workOrderForm">
+          <div class="row">
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
+                <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                <mat-datepicker #fromDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <mat-form-field>
+                <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
+                <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                <mat-datepicker #toDate></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" (click)="searchDate(workOrderForm)" mat-raised-button color="warn">Search</button>
+            </div>
+            <div class="col-sm-4" *ngIf="dataSearchTagShow">
+              <mat-form-field>
+                <mat-label>Select Unit:</mat-label>
+                <mat-select (selectionChange)="searchUnit($event)">
+                  <mat-option *ngFor="let unit of fullLeadUnit" [value]="unit">
+                    {{unit}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <!--    <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select formControlName="monthData"  placeholder="Select Month">
+                    <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
+                      {{day.month}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field>
+                  <mat-select formControlName="yearData" placeholder="Select Year">
+                    <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
+                      {{yrs.year}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div> 
+              <div class="col-md-2">
+                  <button type="button"
+                   (click)="searchMonth(workOrderForm)" 
+                   mat-raised-button color="warn">Search</button>
+                </div>-->
+            <div class="col-md-4" *ngIf="dataSearchTagShow">
+              <button type="button" (click)="searchWithoutGST()" mat-raised-button color="accent">Without GST</button>
+            </div>
+            <div class="col-md-4" *ngIf="dataSearchTagShow">
+              <button type="button" (click)="searchWithGST()" mat-raised-button color="accent">GST</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Account Summary</h5>
+            <p class="card-text">Unit: <b>{{selectedUnit }}</b></p>
+            <p class="card-text">Number of Work Order : <b>{{workOrder?.length}}</b></p>
+            <p class="card-text">GST : <b>{{getTax() }}</b></p>
+            <p class="card-text">Total : <b>{{this.getTotal()}}</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row gridRowHeader display-none-small">
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Work Order ID</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Company Name</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Mobile Number</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Date</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Total</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Action</label>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="workOrder?.length === 0 ">
+      No Work Order
+    </div>
+    <div *ngFor="let data of workOrder">
+      <div class="row gridRow">
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Work Order ID:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.workOrderID}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Company Name:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.companyName}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Mobile Number:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.mobileNumber}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Date:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.date | date: 'dd/MM/yyyy' }}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Total:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.allTotal}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Action:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <a class="nav-link" (click)="getViewWorkOrder(data)">
+              View
+            </a>
+            <a class="nav-link" (click)="createInvoice(data)">
+              Create Invoice
+            </a>
+            <a class="nav-link" (click)="viewInvoice(data)">
+              view Invoice
+            </a>
+            <a class="nav-link" (click)="createProfomaInvoice(data)">
+              Create ProformaInvoice
+            </a>
+            <a class="nav-link" (click)="viewProfomaInvoice(data)">
+              view ProformaInvoice
+            </a>
+            <a class="nav-link" (click)="getEditWorkOrder(data)">
+              Edit
+            </a>
+            <a class="nav-link" (click)="getDeleteSingleWorkOrder(data)">
+              Delete
+            </a>
+            <!--  <a class="nav-link" (click)="createWorkOrder(data)">
+              Work order
+            </a> -->
+          </mat-menu>
+        </div>
+      </div>
+
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  </div>
+</form>

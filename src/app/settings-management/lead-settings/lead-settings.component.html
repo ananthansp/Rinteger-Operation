@@ -1,0 +1,115 @@
+<div class="pageBoxLg">
+  <form [formGroup]="leadSettingsForm" style="margin-top:20px;">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="20" class="pr-1">
+        <a (click)="showServiceForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Service
+        </a>
+      </div>
+      <div fxFlex="20" class="pr-1">
+        <a (click)="showStatusForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Status
+        </a>
+      </div>
+      <div fxFlex="20" class="pr-1">
+        <a (click)="showSourceForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Source
+        </a>
+      </div>
+      <div fxFlex="20" class="pr-1">
+        <a (click)="showTypeForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Type
+        </a>
+      </div>
+      <div fxFlex="20" class="pr-1">
+        <a (click)="showLeadUnitForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> Lead Unit
+        </a>
+      </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+
+      <div fxFlex="20" class="pr-1" *ngIf="showService">
+        <h1>Service</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="service" placeholder="Service" required>
+
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="addLeadService()" [disabled]="!leadSettingsForm.controls.service.valid">Add</button>
+        <h5>Lead Services</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.service ">
+
+            <p><a (click)="deleteLeadService(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div fxFlex="20" class="pr-1" *ngIf="showSource">
+        <h1>Source</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="source" placeholder="Source" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="addLeadSource()" [disabled]="!leadSettingsForm.controls.source.valid">Add</button>
+        <h5>Lead Sources</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.leadSource ">
+
+            <p><a (click)="deleteSource(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div fxFlex="20" class="pr-1" *ngIf="showStatus">
+        <h1>Status</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="status" placeholder="Status" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addLeadStatus()" type="button" [disabled]="!leadSettingsForm.controls.status.valid">Add</button>
+        <h5>Lead Status</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.leadStatus ">
+
+            <p><a (click)="deleteLeadStatus(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div fxFlex="20" class="pr-1" *ngIf="showType">
+        <h1>Type</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="type" placeholder="Type" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="addLeadType()" [disabled]="!leadSettingsForm.controls.type.valid">Add</button>
+        <h5>Lead Type</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.type ">
+
+            <p><a (click)="deleteLeadType(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+      <div fxFlex="20" class="pr-1" *ngIf="showLeadUnit">
+        <h1>Lead Unit</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="leadUnit" placeholder="Type" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" 
+        (click)="addLeadUnit()" [disabled]="!leadSettingsForm.controls.leadUnit.valid">Add</button>
+        <h5>Lead Unit Type</h5>
+        <div *ngFor="let data of settingModel ">
+          <div *ngFor="let value of data.leadUnit">
+
+            <p><a (click)="deleteLeadUnit(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,92 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="form-group">
+      <label class="labelHeader">Requirements</label>
+    </div>
+  </div>
+  <div class="row gridRowHeader display-none-small">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Item</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Quantity</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Price</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Discount</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Description</label>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label>Total</label>
+      </div>
+    </div>
+  </div>
+  <div class="row gridRow" *ngFor="let data of requirementsData; let i = index">
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Item:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.item}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Quantity:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+        {{data.quantity}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Price:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+        {{data.price}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Discount:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+        {{data.discount}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Description:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.description}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Total:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+        {{data.total}}
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-8 col-4  form-group">
+        
+      </div>
+      <div class="col-md-4 col-8 form-group">
+        <div class="row pageBoxSmall">
+           <div  class="col-md-6 col-6 form-group">Sub Total</div>
+           <div class="col-md-6 col-6 form-group">: {{subTotal}}</div>
+           <div  class="col-md-6 col-6 form-group">Tax</div>
+           <div class="col-md-6 col-6 form-group">: {{tax}}</div>
+           <div  class="col-md-6 col-6 form-group">Total</div>
+           <div class="col-md-6 col-6 form-group">: {{allTotal}}</div>
+        </div>
+      </div>
+    </div>
+</div>

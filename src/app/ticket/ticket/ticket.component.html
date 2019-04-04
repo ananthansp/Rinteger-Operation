@@ -1,0 +1,122 @@
+<div class="container topAlignContainer">
+  <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onSubmit(ticketform)">
+
+    <app-ticketcustomersearch [customerModel]="customerdetail" 
+    (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch>
+    <div *ngFor="let customerdata of customerModel">{{customerdata.name}}{{customerdata.mobileNumber}}</div>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="100">
+        <label class="pageBoxLg-label">Create Ticket Form</label>
+      </div>
+
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="customername" placeholder="customername"required>
+          <mat-error *ngIf="ticketform.controls['customername'].errors?.required" >
+            Customer Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="250" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="requirement" placeholder="requirement" required>
+          <mat-error *ngIf="ticketform.controls['requirement'].errors?.required" >
+            Requirement
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="priority" formControlName="priority">
+            <mat-option *ngFor="let data of priority" [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="units"  (selectionChange)="changed($event)" formControlName="units">
+            <mat-option *ngFor="let data of units" [value]="data">
+              {{data}}
+
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="department" formControlName="department">
+            <mat-option *ngFor="let data of departmentData;let i = index " [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="assignedto" formControlName="assignedto">
+            <mat-option *ngFor="let data of registerterdetail;let i = index " [value]="data">
+              {{data.userName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> 
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="assignedby" formControlName="assignedby">
+            <mat-option *ngFor="let data of taskname; let i = index " [value]="data.userName">
+              {{data.userName}}
+
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="status" placeholder="status">
+          <mat-error *ngIf="ticketform.controls['status'].errors?.required" required>
+            Status
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <input matInput formControlName="toclosedate" [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div fxFlex="100" class="mt-1">
+      <button mat-raised-button color="primary">Create</button>
+      <span fxFlex></span>
+      <button mat-raised-button mat-button color="accent" type="button" 
+      (click)="getReset()">Cancel</button>
+    </div>
+  </form>
+</div>

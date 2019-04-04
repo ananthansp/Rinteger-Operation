@@ -1,0 +1,92 @@
+<div fxLayout="row wrap">
+    <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+        <mat-card class="pointer" [routerLink]="['/customers/viewcustomer']">
+          <mat-card-title fxLayoutAlign="start center">
+            <small class="text-muted">Customers</small>
+            <span fxFlex></span>
+          </mat-card-title>
+          <mat-card-content >
+            <h3 class="m-0 font-normal">{{customerModel?.length}}</h3>
+            <!-- <small class="text-muted">Monthly</small> -->
+          </mat-card-content>
+        </mat-card>
+      </div>
+  <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+    <mat-card class="pointer" [routerLink]="['/lead/leadview']">
+      <mat-card-title fxLayoutAlign="start center">
+        <small class="text-muted">Lead</small>
+        <span fxFlex></span>
+      </mat-card-title>
+      <mat-card-content >
+        <h3 class="m-0 font-normal">{{leadModel?.length}}</h3>
+        <!-- <small class="text-muted">Monthly</small> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+
+    <mat-card  class="pointer" 
+    [routerLink]="['/workorder/viewallworkorder']">
+      <mat-card-title>
+        <small class="text-muted">Work Order</small>
+        <span fxFlex></span>
+      </mat-card-title>
+      <mat-card-content>
+         <h3 class="m-0 font-normal">{{workOrderModel?.length}}</h3>
+        <!-- <small class="text-muted">Monthly</small> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+    <mat-card class="pointer" [routerLink]="['/quotation/viewallquotation']" >
+      <mat-card-title>
+        <small class="text-muted">Quotation</small>
+        <span fxFlex></span>
+      </mat-card-title>
+      <mat-card-content>
+         <h3 class="m-0 font-normal">{{quotationModel?.length}}</h3>
+        <!--   <small class="text-muted">Monthly</small> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+    <mat-card class="pointer"  [routerLink]="['/invoice/viewallinvoice']">
+      <mat-card-title>
+        <small class="text-muted">Invoice</small>
+        <span fxFlex></span>
+      </mat-card-title>
+      <mat-card-content>
+                <h3 class="m-0 font-normal">{{invoiceModel?.length}}</h3>
+        <!-- <small class="text-muted">Monthly</small> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+    <mat-card class="pointer"
+     [routerLink]="['/proformainvoice/viewallproformainvoice']">
+      <mat-card-title>
+        <small class="text-muted">Profoma Invoice</small>
+        <span fxFlex></span>
+      </mat-card-title>
+      <mat-card-content>
+         <h3 class="m-0 font-normal">{{proformaInvoice?.length}}</h3>
+        <!--   <small class="text-muted">Monthly</small> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="100" fxFlex.gt-sm="16" fxFlex.sm="50" class="p-2">
+      <mat-card class="pointer"
+       [routerLink]="['/proformainvoice/viewallproformainvoice']">
+        <mat-card-title>
+          <small class="text-muted">Price</small>
+          <span fxFlex></span>
+        </mat-card-title>
+        <mat-card-content>
+           <h3 class="m-0 font-normal"><small class="text-muted">Billing Value:</small>
+            {{workOrderTotalAmount[0].totalAmount}}</h3>
+          <!--   <small class="text-muted">Monthly</small> -->
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+</div>

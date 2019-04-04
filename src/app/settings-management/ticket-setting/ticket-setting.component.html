@@ -1,0 +1,67 @@
+<div class="pageBoxLg">
+  <form [formGroup]="ticketSettingsForm" style="margin-top:20px;">
+
+<div class="row">
+  <div class="col-md-4">
+    <div  *ngIf="showDepartment">
+      <h1>Department</h1>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="department" placeholder="department" required>
+
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button"  (click)="addDepartment()"
+       [disabled]="!ticketSettingsForm.controls.department.valid">Add</button>
+      <h5>Department</h5>
+      <div *ngFor="let data of ticketsettingholder ">
+        <div *ngFor="let value of data.department ">
+        
+          <p><a (click)="deleteDepartment(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-4">
+    <div *ngIf="showAssignedto">
+      <h1>Assigned To</h1>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="assignedto" placeholder="assignedto" required>
+
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button"  (click)="addAssignedto()"
+       [disabled]="!ticketSettingsForm.controls.assignedto.valid">Add</button>
+      <h5>Assigned To</h5>
+      <div *ngFor="let data of ticketsettingholder ">
+        <div *ngFor="let value of data.assignedto ">
+        
+          <p><a (click)="deleteAssignedto(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-4">
+    <div *ngIf="showAssignedby">
+      <h1>Assigned By</h1>
+      <mat-form-field class="full-width">
+        <input matInput formControlName="assignedby" placeholder="assignedby" required>
+
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button"  (click)="addAssignedby()"
+       [disabled]="!ticketSettingsForm.controls.assignedby.valid">Add</button>
+      <h5>Assigned By</h5>
+      <div *ngFor="let data of ticketsettingholder ">
+        <div *ngFor="let value of data.assignedby ">
+        
+          <p><a (click)="deleteAssignedby(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+</div>

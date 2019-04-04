@@ -1,0 +1,90 @@
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="incomeForm" >
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Edit Income</label>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="workOrderID" [readonly]="true" placeholder="WorkOrderID" 
+            [value]="incomeValue?.workOrderID"
+              (ngModelChange)="incomeValue.workOrderID=$event">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="customerName" [value]="incomeValue?.customerName" 
+            (ngModelChange)="incomeValue.customerName=$event"
+              placeholder="customerName">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field>
+            <input matInput formControlName="date" [matDatepicker]="picker" [value]="incomeValue?.date" 
+            (ngModelChange)="incomeValue.date=$event"
+             placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="companyName" [value]="incomeValue?.companyName"
+             (ngModelChange)="incomeValue.companyName=$event"
+              placeholder="Company Name">  
+          </mat-form-field>
+        </div>        
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+              <mat-select placeholder="Select Mode of payments" [(ngModel)]="incomeValue.modeOfPayment"
+              (ngModelChange)="incomeValue.modeOfPayment=$event" formControlName="modeOfPayment">
+                  <mat-option *ngFor="let pay of paymode" [value]="pay">
+                    {{pay}}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="allTotal" [value]="incomeValue?.allTotal || null"
+             (ngModelChange)="incomeValue.allTotal=$event" 
+              placeholder="Total Amount">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="paidAmount" [value]="incomeValue?.paidAmount || null"
+            (ngModelChange)="incomeValue.paidAmount=$event"
+              placeholder="paidAmount">          
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="tds" [value]="incomeValue?.tds || null"
+            (ngModelChange)="incomeValue.tds=$event"
+              placeholder="TDS">          
+          </mat-form-field>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+              <mat-select placeholder="Select GST Option"  [(ngModel)]="incomeValue.gst"
+              (ngModelChange)="incomeValue.gst=$event" formControlName="gst">
+                  <mat-option *ngFor="let gs of gstOption" [value]="gs">
+                    {{gs}}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+        </div>       
+        <div fxFlex="100" class="mt-1">
+            <button mat-raised-button type="button" color="primary" 
+            (click)=updateIncomeSheet(incomeValue)>Save</button>          
+          <span fxFlex></span>
+          <span fxFlex></span>
+          <button mat-raised-button mat-button color="accent"
+           type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>

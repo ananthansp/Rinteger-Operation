@@ -1,0 +1,65 @@
+<div class="pageBoxLg">
+    <form [formGroup]="materialSettingsForm" style="margin-top:20px;">
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="25" class="pr-1">
+          <a (click)="showShootTypeForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon>  Shoot Type
+          </a>
+        </div>
+        <div fxFlex="25" class="pr-1">
+          <a (click)="showDispatchTypeForm()">
+            <mat-icon class="gridEdit">add_box</mat-icon> Dispatch Type
+          </a>
+        </div>      
+        <div fxFlex="25" class="pr-1">
+            <a (click)="showMaterialStatusForm()">
+              <mat-icon class="gridEdit">add_box</mat-icon> Material Status
+            </a>
+          </div>
+      </div>
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="25" class="pr-1" *ngIf="showShootType">
+          <h1>  Shoot Type</h1>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="shootType" placeholder="Shoot Type" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="button"  (click)="addShootType()" 
+          [disabled]="!materialSettingsForm.controls.shootType.valid">Add</button>
+          <h5> Shoot Type</h5>
+          <div *ngFor="let data of settingValue ">
+            <div *ngFor="let value of data.shootType ">          
+              <p><a (click)="deleteShootType(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="25" class="pr-1" *ngIf="showDispatchType">
+          <h1> Dispatch Type</h1>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="dispatchType" placeholder="Dispatch Type" required>
+          </mat-form-field>
+          <button mat-raised-button color="primary"  type="button" (click)="addDispatchType()" 
+          [disabled]="!materialSettingsForm.controls.dispatchType.valid">Add</button>
+          <h5> Dispatch Type</h5>
+          <div *ngFor="let data of settingValue ">
+            <div *ngFor="let value of data.dispatchType ">          
+              <p><a (click)="deleteDispatchType(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+            </div>
+          </div>
+        </div>   
+        <div fxFlex="25" class="pr-1" *ngIf="showMaterialStatus">
+            <h1> Material Status</h1>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="materialStatus" placeholder="Material Status" required>
+            </mat-form-field>
+            <button mat-raised-button color="primary"  type="button" (click)="addMaterialStatus()" 
+            [disabled]="!materialSettingsForm.controls.materialStatus.valid">Add</button>
+            <h5> Material Status</h5>
+            <div *ngFor="let data of settingValue ">
+              <div *ngFor="let value of data.materialStatus ">          
+                <p><a (click)="deleteMaterialStatus(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+              </div>
+            </div>
+          </div>   
+      </div>
+    </form>
+  </div>

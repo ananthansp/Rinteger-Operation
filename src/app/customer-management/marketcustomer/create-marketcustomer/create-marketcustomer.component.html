@@ -1,0 +1,81 @@
+<div class="container topAlignContainer">
+  <form [formGroup]="marketCustomerDetailsForm" (ngSubmit)="marketCustomerDetailsForm.valid && addMarketSingleCustomer(marketCustomerDetailsForm)">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="100">
+        <label class="pageBoxLg-label">Create Marketing Customer</label>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <div>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="mobileNumber" placeholder="Mobile Number"
+            maxlength="10" minlength="10"
+             required>
+            <mat-error *ngIf="marketCustomerDetailsForm.controls['mobileNumber'].errors?.required" required>
+              Enter Mobile Number
+              <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="!marketCustomerDetailsForm.controls['mobileNumber'].errors?.required"
+            >
+            Enter Valid Mobile Number
+            <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="marketCustomerDetailsForm.controls['name'].errors?.required" required>
+            Enter Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="emailId" placeholder="Email Id">
+          <mat-error *ngIf="marketCustomerDetailsForm.controls['emailId'].errors?.required">
+            Enter Email ID
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="location" placeholder="Location">
+          <mat-error *ngIf="marketCustomerDetailsForm.controls['location'].errors?.required">
+            Enter Location
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="whatsAppNo" placeholder="whatsAppNo">
+          <mat-error *ngIf="marketCustomerDetailsForm.controls['whatsAppNo'].errors?.required">
+            Enter whatsAppNo
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="landLine" placeholder="landLine">
+
+          <mat-error *ngIf="marketCustomerDetailsForm.controls['landLine'].errors?.required">
+            Enter landLine
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="100" class="mt-1">
+          <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        
+        <span fxFlex></span>
+        <button mat-raised-button color="primary">Save</button>
+      </div>
+    </div>
+  </form>
+</div>

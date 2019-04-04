@@ -1,0 +1,111 @@
+<div class="container topAlignContainer">
+  <form [formGroup]="ticketform" >
+
+    <app-ticketcustomersearch [customerModel]="customerdetail" 
+    (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch>
+    <div *ngFor="let customerdata of customerModel">{{customerdata.name}}{{customerdata.mobileNumber}}</div>
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="100">
+        <label class="pageBoxLg-label">Create Ticket Form</label>
+      </div>
+
+     
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="customername" [value]="ticketEdit?.customername"
+          [readonly]=true
+            placeholder="customername">  
+        </mat-form-field>
+      </div>
+
+      
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="requirement" [value]="ticketEdit?.requirement"
+          [readonly]=true
+            placeholder="requirement">  
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="priority" [value]="ticketEdit?.priority"
+          [readonly]=true
+            placeholder="priority">  
+        </mat-form-field>
+      </div>
+
+
+      
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="units" [value]="ticketEdit?.units"
+          [readonly]=true
+            placeholder="units">  
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="department" [value]="ticketEdit?.department"
+          [readonly]=true
+            placeholder="department">  
+        </mat-form-field>
+      </div>
+      
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="assignedto" [value]="ticketEdit?.assignedto"
+          [readonly]=true
+            placeholder="assignedTo">  
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="assignedby" [value]="ticketEdit?.assignedby"
+          [readonly]=true
+            placeholder="assignedby">  
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="status" [value]="ticketEdit?.status"
+          (ngModelChange)="ticketEdit.status=$event"
+            placeholder="status">  
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="toclosedate" [value]="ticketEdit?.toclosedate"
+          [readonly]=true
+            placeholder="toclosedate">  
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="closeddate" [value]="ticketEdit?.closeddate"
+        
+            placeholder="closeddate">  
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+   
+
+    </div>
+    <div fxFlex="100" class="mt-1">
+      <button mat-raised-button color="primary"(click)="onSubmit(ticketEdit)">Update</button>
+      <span fxFlex></span>
+      <button mat-raised-button mat-button color="accent" type="button" 
+      (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>

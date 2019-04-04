@@ -1,0 +1,17 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Existing Customer" aria-label="Number" matInput 
+    [formControl]="mobileNumberList" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async"
+       (onSelectionChange)="selectedCustomer($event, option._id)"
+       [value]="option.mobileNumber"
+      >
+        {{option.mobileNumber }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-raised-button (click)="closed()" color="primary">Cancel</button>
+</form>
+
+

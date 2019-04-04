@@ -1,0 +1,173 @@
+<form [formGroup]="materialDetailsForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">      
+        <div class="col-3">
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <input matInput formControlName="fromDate" [matDatepicker]="picker" 
+              placeholder="Starting Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="toDate" [matDatepicker]="picker1" 
+              placeholder="Ending Date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div><div>
+            <button mat-button (click)="searchByDate(materialDetailsForm)" type="submit">
+                <mat-icon>search</mat-icon></button>
+            </div>
+        </div>          
+        <div class="col-2">
+            <app-search-material [materialModel]='materialValue' 
+                  (searchMaterial)='filterMaterial($event)'>            
+            </app-search-material>
+            <button mat-raised-button (click)='getAllMaterial()' type="submit">Refresh</button>
+        </div>           
+        <div>
+          <mat-form-field>
+              <input matInput formControlName="finddate" [matDatepicker]="picker2" 
+              placeholder="search Date">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div><div>
+            <button mat-button (click)="searchByDateMaterial(materialDetailsForm)" type="submit">
+                <mat-icon>search</mat-icon></button>                
+       </div>
+       <div class="col-3">
+          <div class="input-group ">
+            <div class="row">
+              <div class="col">
+            <label >ShootStatus:</label></div>
+            <div class="col">
+            <select placeholder="Shoot Status" (change)="SearchByShootStatus($event.target.value)">
+              <option *ngFor="let data of shootStatus" [value]="data">{{data}}</option>
+            </select>
+          </div>
+          </div>
+         <!--  <div class="row">
+            <div class="col-6">
+            <label>PaymentStatus:</label></div>
+            <div class="col-6">
+            <select placeholder="Payment Status" (change)=SearchByPaymentStatus($event.target.value)>
+                <option *ngFor="let data of paymentStatus" [value]="data">{{data}}</option>
+              </select>
+            </div>
+            </div> -->
+            <!-- <div class="row">
+              <div class="col-6">
+              <label>ShootType:</label></div>
+              <div class="col-6">
+            <select placeholder="shootType" (change)=SearchByShootType($event.target.value)>
+                <option *ngFor="let data of shootType" [value]="data">{{data}}</option>
+              </select></div>
+            </div> -->
+            <div class="row">
+              <div class="col-6">
+              <label>DispatchType:</label></div>
+              <div class="col-6">
+            <select placeholder="dispatchType" (change)=SearchByDispatchType($event.target.value)>
+                <option *ngFor="let data of dispatchType" [value]="data">{{data}}</option>
+              </select></div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                <label>MaterialStatus:</label></div>
+                <div class="col-6">
+              <select placeholder="materialStatus" (change)=SearchByMaterialStauts($event.target.value)>
+                  <option *ngFor="let data of materialStatus" [value]="data">{{data}}</option>
+                </select>
+              </div>
+              </div>
+          </div>          
+          </div>        
+        <!-- <div class="bor col-1">
+          NO.of Product  
+              {{getNoOfProduct() }}
+        </div> -->
+      </div>
+      <div class="row gridRowHeader display-none-small">
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Received Date</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Customer Name</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>PaymentStatus</h6></label>
+          </div>
+        </div>
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Received By</h6></label>
+          </div>
+        </div>
+              
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Action</h6></label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of materialModel">
+        <div class="row gridRow">
+            <div class="display-none-large col-6">
+                <label class="gridLabel">Received Date:</label>
+              </div>
+              <div class="col-md-2 col-6 vcenter form-group">
+                {{data.date | date: 'dd/MM/yyyy'}}
+              </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">UserName:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.customerName}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">PaymentStatus:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.paymentStatus}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Received By:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.receivedBy}}
+          </div>         
+          
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getViewMaterial(data)">
+                View
+              </a>
+              <a class="nav-link" (click)="getEditMaterial(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteMaterial(data)">
+                Delete
+              </a>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+</form>

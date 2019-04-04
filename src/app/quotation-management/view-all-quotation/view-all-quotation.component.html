@@ -1,0 +1,140 @@
+<form style="padding-top:20px">
+  <label class="pageBoxLg-label">View Quotation</label>
+  <div class="pageBoxLg">
+    <app-search-quotation [quotationModel]="quotationModel" (searchQuotation)="filterQuotation($event)"></app-search-quotation>
+    <div class="row" [formGroup]="quotationDetailsForm">
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="From Date" required>
+          <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+          <mat-datepicker #fromDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="To Date" required>
+          <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+          <mat-datepicker #toDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" (click)="searchDate(quotationDetailsForm)" mat-raised-button color="warn">Search</button>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-select formControlName="monthData" placeholder="Select Month">
+            <mat-option *ngFor="let day of allMonth; let i = index" [value]="i+1">
+              {{day.month}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-select formControlName="yearData" placeholder="Select Year">
+            <mat-option *ngFor="let yrs of allYear" [value]="yrs.year">
+              {{yrs.year}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button type="button" (click)="searchMonth(quotationDetailsForm)" mat-raised-button color="warn">Search</button>
+      </div>
+    </div>
+    <div class="row gridRowHeader display-none-small">
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Quotation ID</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Company Name</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Mobile Number</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div>
+          <label>Date</label>
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <!-- <label>Lead Status</label> -->
+        </div>
+      </div>
+      <div class="col-md-2 vcenterHeader">
+        <div class="form-group">
+          <label>Action</label>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="quotation?.length === 0">
+      No quotation
+    </div>
+    <div *ngFor="let data of quotation">
+
+      <div class="row gridRow">
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Quotation ID:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.quotationID}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Company Name:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.companyName}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Mobile Number:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.mobileNumber}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Date:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{data.date | date: 'dd/MM/yyyy' }}
+        </div>
+        <div class="display-none-large col-6">
+          <!--   <label class="gridLabel">Lead Status:</label> -->
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          <!-- {{data.leadStatus}} -->
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Action:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <a class="nav-link" (click)="getViewQuotation(data)">
+              View
+            </a>
+            <a class="nav-link" (click)="getEditQuotation(data)">
+              Edit
+            </a>
+            <a class="nav-link" (click)="getDeleteSingleQuotation(data)">
+              Delete
+            </a>
+            <!--  <a class="nav-link" (click)="createWorkOrder(data)">
+              Work order
+            </a> -->
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+      [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  </div>
+</form>

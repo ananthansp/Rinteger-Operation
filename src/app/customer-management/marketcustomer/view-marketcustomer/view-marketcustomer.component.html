@@ -1,0 +1,168 @@
+<form >
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="btn">
+          <a (click)="addMarketCustomer()">
+            <mat-icon class="gridEdit">add_box</mat-icon>
+          </a>
+        </div>
+      </div>
+      <app-search-customer [customerModel]="customerMarketValue"
+       (searchCustomer)="filterMarketCustomer($event)"></app-search-customer>
+      <div class="row gridRowHeader display-none-small">
+      <!--   <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Customer ID</label>
+          </div>
+        </div> -->
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Mobile Number</label>
+          </div>
+        </div>
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label>Name</label>
+          </div>
+        </div>
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label>Email Id</label>
+          </div>
+        </div>
+        <!-- <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Address</label>
+          </div>
+        </div> -->
+        <!--  <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Company Name</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Company Address</label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Gst Number</label>
+          </div>
+        </div> -->
+        <!-- <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label>Brand Name</label>
+          </div>
+        </div> -->
+        <div class="col-md-2 vcenterHeader">
+          <div class="form-group">
+            <label>Action</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="customerMarketModel?.length === 0">
+        No Customer
+      </div>
+      <div *ngFor="let data of customerMarketModel">
+        <div class="row gridRow">
+         <!--  <div class="display-none-large col-6">
+            <label class="gridLabel">Customer ID:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.customerID}}
+          </div> -->
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Mobile Number:</label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            {{data.mobileNumber}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Name:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.name}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Email ID:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter wordWrap form-group">
+            {{data.emailId}}
+          </div>
+          <!-- <div class="display-none-large col-6">
+            <label class="gridLabel">Address:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+              {{data.location}},
+              {{data.city}},
+              {{data.state}},
+              {{data.pincode}}
+          </div> -->
+          <!-- <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Company Name:
+            </label>
+          </div>
+          <div class="col-md-2 col-6 vcenter form-group">
+            &nbsp;{{data.companyName}}
+          </div> -->
+          <!--           <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Company Address:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group wordWrap">
+            &nbsp;{{data.companyAddress}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Gst Number
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.gstNumber}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Brand Name</label>
+          </div> -->
+          <!-- <div class="col-md-1  col-6 vcenter form-group">
+            &nbsp;{{data.brandName}}
+          </div>
+          <div class="col-md-1  col-6 vcenter form-group">
+            <a (click)="getEditCustomer(data)">
+              <mat-icon class="gridEdit" color="primary">edit</mat-icon>
+            </a>
+            <a (click)="getDeleteCustomer(data)">
+              <mat-icon class="gridEdit">delete</mat-icon>
+            </a>
+          </div> -->
+          <div class="col-md-2 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link" (click)="getViewMarketSingleCustomer(data)">
+                View
+              </a>
+              <a class="nav-link" (click)="getEditMarketCustomer(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteMarketCustomer(data)">
+                Delete
+              </a>
+              <!--  <a class="nav-link" (click)="createWorkOrder(data)">
+                Work order
+              </a> -->
+            </mat-menu>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+      [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+  </div>
+</form>

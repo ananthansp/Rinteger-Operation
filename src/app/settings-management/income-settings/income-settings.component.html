@@ -1,0 +1,46 @@
+<div class="pageBoxLg">
+  <form [formGroup]="incomeSettingsForm" style="margin-top:20px;">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="25" class="pr-1">
+        <a (click)="showPaymentForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon>  Mode of Payment
+        </a>
+      </div>
+      <div fxFlex="25" class="pr-1">
+        <a (click)="showGstForm()">
+          <mat-icon class="gridEdit">add_box</mat-icon> GST
+        </a>
+      </div>      
+    </div>
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="25" class="pr-1" *ngIf="showPayment">
+        <h1>Mode of Payment</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="modeOfPayment" placeholder="modeOfPayment" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button"  (click)="addPaymentMode()" 
+        [disabled]="!incomeSettingsForm.controls.modeOfPayment.valid">Add</button>
+        <h5>Mode of Payment</h5>
+        <div *ngFor="let data of settingValue ">
+          <div *ngFor="let value of data.modeOfPayment ">          
+            <p><a (click)="deletePaymentMode(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="25" class="pr-1" *ngIf="showGst">
+        <h1>GST</h1>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="gst" placeholder="gst" required>
+        </mat-form-field>
+        <button mat-raised-button color="primary"  type="button" (click)="addGst()" 
+        [disabled]="!incomeSettingsForm.controls.gst.valid">Add</button>
+        <h5>GST</h5>
+        <div *ngFor="let data of settingValue ">
+          <div *ngFor="let value of data.gst ">          
+            <p><a (click)="deleteGst(value)"><mat-icon>clear</mat-icon></a>{{value}}</p>
+          </div>
+        </div>
+      </div>     
+    </div>
+  </form>
+</div>

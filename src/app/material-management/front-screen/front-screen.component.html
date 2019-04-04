@@ -1,0 +1,99 @@
+<form [formGroup]="materialDetailsForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+      <div class="row">       
+        <div class="col-4">
+          <div fxFlex="50" class="pr-1">
+            <mat-form-field>
+              <input matInput formControlName="fromDate" [matDatepicker]="picker" 
+              placeholder="Starting Date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="toDate" [matDatepicker]="picker1"
+               placeholder="Ending Date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <button mat-button (click)="searchByDate(materialDetailsForm)" type="submit">
+              <mat-icon>search</mat-icon></button>
+          </div>
+        </div>        
+        <div>
+          <button mat-raised-button (click)="getMaterialSheet()" type="submit">MaterialSheet</button>
+          <button mat-raised-button (click)="findAllWorkOrder()" type="submit">Refresh</button>          
+        </div>
+        <div class="col-5">
+            <app-search-material [materialModel]='materialValue' (searchMaterial)='filterMaterial($event)'>            
+              </app-search-material>
+        </div>               
+      </div>
+      <div class="row gridRowHeader display-none-small">
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label><h6>WorkOrder ID</h6></label>
+          </div>
+        </div>
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Customer Name</h6></label>
+          </div>
+        </div>
+        <div class="col-md-3 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Received Date</h6></label>
+          </div>
+        </div>           
+        
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Action</h6></label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of materialModel">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">WorkOrder ID:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.workOrderID}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Customer Name:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.customerName}}
+          </div>
+           <div class="display-none-large col-6">
+            <label class="gridLabel">Received Date:</label>
+          </div>
+          <div class="col-md-3 col-6 vcenter form-group">
+            {{data.date | date: 'dd/MM/yyyy'}}
+          </div>              
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">             
+              <a class="nav-link" (click)="getEditMaterial(data)">
+                Create MaterialSheet
+              </a>
+              <a class="nav-link" (click)="getDeleteMaterial(data)">
+                Delete
+              </a>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[2, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+</form>

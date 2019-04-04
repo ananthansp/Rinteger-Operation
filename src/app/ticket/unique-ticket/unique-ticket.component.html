@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <div class="row" *ngFor="let data of ticketholder">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Ticket No:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.ticketno}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Customer Name</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.customername}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Requirement</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.requirement}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Date/Time:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.datetime}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Department</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.department}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Assigned To:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.assignedto}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Assigned By:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.assignedby}}</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Status</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.status}}</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">To Close Date:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.toclosedate}}</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Close Date:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.closeddate}}</label>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

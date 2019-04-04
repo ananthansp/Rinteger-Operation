@@ -1,0 +1,17 @@
+<form [formGroup]="proformaDetailsForm">
+  <div class="row">
+    <div class="col-md-6 col">
+      <div class="btn">
+        <div class="input-group">
+          <select #selectElem>
+            <option *ngFor="let data of searchType">{{data}}</option>
+          </select>
+          <input type="text" class="form-control" placeholder="Search" formControlName="srchterm" #searchValue />
+          <button mat-button type="submit" (click)="searchBy(proformaInvoiceModel, selectElem.value, searchValue.value)">
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

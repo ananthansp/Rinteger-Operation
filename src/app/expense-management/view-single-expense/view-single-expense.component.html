@@ -1,0 +1,153 @@
+<form novalidate style="padding-top:20px">
+  <label class="pageBoxLg-label">Expense Detail</label>
+  <div class="pageBoxLg" *ngFor="let expenseData of expenseModel; let i = index">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.name}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Mobile Number</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.mobileNumber}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.companyName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Expense Date</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.date | date: 'dd/MM/yyyy'}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Expense Type</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.expenseType}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Mode of Payment</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.modeOfPayment}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Location</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.location}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Total Amount</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.totalAmount}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Paid</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.paid}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Balance Amount</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.balance}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Voucher No</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.vouNo}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Expense Description</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.expensesDescription}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">GST</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{expenseData.gst}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxFlex="100" class="mt-1">
+        <button mat-raised-button mat-button color="accent" type="button" (click)="cancel()">Cancel</button>
+        <span fxFlex></span>
+        <span fxFlex></span>
+        <button mat-raised-button type="button" color="primary" (click)="getEdit(expenseData)">Edit</button>
+      </div>
+    </div>
+
+  </div>
+</form>

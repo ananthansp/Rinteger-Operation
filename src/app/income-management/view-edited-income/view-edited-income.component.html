@@ -1,0 +1,170 @@
+<form [formGroup]="incomeDetailsForm">
+  <div class="pageBoxLg">
+    <div class="container-fluid">
+       <div class="row">
+         <div class="col-4">
+           <button mat-raised-button (click)="getTds()" color="success" type="submit">TDS</button>
+           <button mat-raised-button (click)="getAll()" color="success" type="submit">ALL</button>
+         </div>
+         <div class="col-5">
+         <app-search-income [incomeModel]='incomeValue' (searchIncome)='filterIncome($event)'></app-search-income>
+        </div>
+        <div class="bor col">
+
+          Total : {{getTotal()}}
+          <br> Paid : {{getPaid()}}
+          <br> Balance : {{getBalance()}}
+          <br> TDS : {{getTdsTotal()}}
+
+        </div>
+        </div>
+      <div class="row gridRowHeader display-none-small">
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>WorkOrder ID</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Customer Name</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Date</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Company Name</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Mode of Income</h6></label>
+          </div>
+        </div>        
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Total Amount</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Paid</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>TDS</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Balance</h6></label>
+          </div>
+        </div>
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>GST</h6></label>
+          </div>
+        </div>
+        
+        <div class="col-md-1 vcenterHeader">
+          <div class="form-group">
+            <label><h6>Action</h6></label>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let data of incomeModel">
+        <div class="row gridRow">
+          <div class="display-none-large col-6">
+            <label class="gridLabel">WorkOrder ID:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.workOrderID}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Customer Name:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.customerName}}
+
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Date:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.date | date: 'dd/MM/yyyy'}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Company Name:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.companyName }}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Mode of Payment:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.modeOfPayment}}
+          </div>          
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Total Amount:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.allTotal}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Paid:
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.paidAmount}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">TDS:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.tds}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">
+              Balance
+            </label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            &nbsp;{{data.balanceAmount}}
+          </div>          
+          <div class="display-none-large col-6">
+            <label class="gridLabel">GST:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            {{data.gst}}
+          </div>
+          <div class="display-none-large col-6">
+            <label class="gridLabel">Action:</label>
+          </div>
+          <div class="col-md-1 col-6 vcenter form-group">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">             
+              <a class="nav-link" (click)="getEditIncome(data)">
+                Edit
+              </a>
+              <a class="nav-link" (click)="getDeleteIncome(data)">
+                Delete
+              </a>
+            </mat-menu>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>
+</form>

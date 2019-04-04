@@ -1,0 +1,44 @@
+.expandMenuBar{
+    opacity: 1;
+    display: block;
+}
+.collapseMenuBar{
+    opacity: 0;
+    display: none;
+    
+}
+.menu-button{
+    padding: 3px;
+}
+.menu-button.rotated {
+    transform: rotate(180deg);
+  }
+.dropdown-content {
+    position: absolute;
+    background-color: lightslategray;
+    min-width: 300px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 10;
+  }
+  .dropdown {
+    min-width: 300px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content a {
+    color: #ffff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 8px;
+    
+  }
+  .dropdown-content a:hover {
+    padding: 12px 16px;
+    text-decoration: none;
+    font-size: 8px;
+    background-color: #777777;
+    display: block;
+  }

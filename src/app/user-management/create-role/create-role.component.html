@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <form [formGroup]="accessForm" class="p-3" novalidate style="padding-top:60px; padding-bottom:60px" (ngSubmit)="sendPermission(accessForm)">
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="role" formControlName="role">
+        </mat-form-field>
+      </div>
+            <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+    <div formGroupName="marketingRole" class="pb-3" class="row">
+      <div class="col-md-12">Marketing</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="customerNav" class="mail-checkbox">
+          customer
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="leadNav" class="mail-checkbox">
+          lead
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="bookingNav" class="mail-checkbox">
+          booking
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="quotationNav" class="mail-checkbox">
+          quotation
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="workOrderNav" class="mail-checkbox">
+          workOrder
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="financialRole" class="pb-3" class="row">
+      <div class="col-md-12">Financial</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="incomeNav" class="mail-checkbox">
+          income
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="expenseNav" class="mail-checkbox">
+          expense
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="invoiceNav" class="mail-checkbox">
+          invoice
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="profomaInvoiceNav" class="mail-checkbox">
+          profoma
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="baseRole" class="pb-3" class="row">
+      <div class="col-md-12">Base</div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="ticketNav" class="mail-checkbox">
+          Ticket
+        </mat-checkbox>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox formControlName="taskNav" class="mail-checkbox">
+          expense
+        </mat-checkbox>
+      </div>
+    </div>
+    <div formGroupName="adminRole" class="pb-3" class="row">
+        <div class="col-md-12">Admin</div>
+        <div class="col-md-2">
+          <mat-checkbox formControlName="settingNav" class="mail-checkbox">
+            Setting
+          </mat-checkbox>
+        </div>
+        <div class="col-md-2">
+          <mat-checkbox formControlName="uploadNav" class="mail-checkbox">
+            upload
+          </mat-checkbox>
+        </div>
+      </div>
+    <button mat-raised-button color="accent">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,114 @@
+<span [routerLink]="['/ticket/create',userId]">
+
+  <mat-icon class="gridEdit" *ngIf="this.userRole === 'admin'">add_box</mat-icon>
+</span>
+
+
+<div class="row">
+  <div class="col-md-2  m-3" *ngIf="this.userRole === 'admin'">
+    <button mat-raised-button color="accent" matBadge="{{deadcount}}" matBadgePosition="after" matBadgeColor="accent"
+      (click)="deadlinedTicket()"> DeadLine passed </button>
+  </div>
+  <div class="col-md-2  m-3" *ngIf="this.userRole === 'admin'">
+    <button mat-raised-button color="accent" (click)="retriveTicket()" matBadge="{{all}}" matBadgePosition="after"
+      matBadgeColor="accent">All Tickets </button>
+  </div>
+  <div class="col-md-2 m-3" *ngFor="let unit of units">
+    <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
+      matBadgeColor="primary" (click)="getunitwiseTicket(unit.name)">{{unit.name}}</button>
+  </div>
+
+</div>
+
+
+
+
+<div class="row gridRowHeader display-none-small">
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Ticket No</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Customer Name</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Date/Time</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div>
+      <label>Department</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Requirement</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Status</label>
+    </div>
+  </div>
+</div>
+<div *ngFor="let data of ticketholder">
+  <div class="row gridRow">
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Ticket No</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.ticketno}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Customer Name:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.customername}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Date/Time:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.datetime}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Department:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.department}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Requirement:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.requirement}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Status:</label>
+    </div>
+    <div class="col-md-1 col-6 vcenter form-group">
+      {{data.status}}
+    </div>
+    <div class="col-md-1 col-6 vcenter form-group">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <!-- <a class="nav-link" (click)="uniqTicket(data._id)">View</a> -->
+        <a class="nav-link" [routerLink]="['/ticket/uniqueview',data._id]">View</a>
+        <a class="nav-link" [routerLink]="['/ticket/ticketedit', data._id, userId ]">Update Status</a>
+        <a class="nav-link" *ngIf="this.userRole === 'admin'" (click)=" deleteTicket(data)">Detele</a>
+      </mat-menu>
+    </div>
+
+  </div>
+
+</div>
+
+
+<mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+  [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>

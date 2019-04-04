@@ -1,0 +1,89 @@
+<form novalidate style="padding-top:20px" [formGroup]="expenseDetailsForm">
+  <label class="pageBoxLg-label">Amount-Details</label>
+  <div class="pageBoxLg" *ngFor="let data of expenseModel ">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Date</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.date | date: 'dd/MM/yyyy' }}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.name}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.companyName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Total Amount</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.totalAmount}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Paid Amount</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.paid}}</label>
+            </div>
+          </div>
+
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Balance Amount</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.balance }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-md-2">
+      <div class="mt-5">
+        <button mat-raised-button type="button" color="accent" (click)="back()">Back</button>
+      </div>
+    </div>
+  </div>
+
+
+</form>

@@ -1,0 +1,13 @@
+  <div class="col-md-6">
+    <mat-form-field>
+      <mat-select #tempVal placeholder="Select the template">
+        <mat-option *ngFor="let val of templates" [value]="val">
+          {{val}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+<button mat-raised-button 
+(click)="viewSingleInvoicePdf(proformaInvoiceDetails, customer, 
+companyDetails, tempVal.value)"
+  color="accent" type="button">Download PDF</button>

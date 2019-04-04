@@ -1,0 +1,115 @@
+<span [routerLink]="['/task/create', userId]">
+
+  <mat-icon class="gridEdit" *ngIf="this.userRole === 'admin'">add_box</mat-icon>
+</span>
+
+
+<div class=row>
+  <div class="col-md-2 m-3" *ngIf="this.userRole === 'admin'">
+    <button mat-raised-button color="accent" matBadge="{{deadcount}}" 
+      matBadgePosition="after" matBadgeColor="accent" (click)="deadlinedTask()"> DeadLine passed </button>
+  </div>
+  <div class="col-md-2 m-3" *ngIf="this.userRole === 'admin'">
+    <button mat-raised-button color="accent" (click)="getAllTask()" matBadge="{{all}}"
+      matBadgePosition="after" matBadgeColor="accent">All Tickets </button>
+  </div>
+  <div class="col-md-2 m-3" *ngFor="let unit of units">
+    <!-- {{unit.counts | json}} -->
+    <button mat-raised-button color="primary" matBadge="{{unit.counts}}" matBadgePosition="before"
+      matBadgeColor="primary" (click)="getunitwiseTask(unit.name)">{{unit.name}}</button>
+  </div>
+
+</div>
+
+
+
+
+<div class="row gridRowHeader display-none-small">
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Task No</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Name</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Date/Time</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div>
+      <label>Department</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Task Title</label>
+    </div>
+  </div>
+  <div class="col-md-2 vcenterHeader">
+    <div class="form-group">
+      <label>Status</label>
+    </div>
+  </div>
+</div>
+<div *ngFor="let data of taskholder">
+  <div class="row gridRow">
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Ticket No</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.taskNo}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Name:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.assignedTo}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Date/Time:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.dateTime}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Department:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.department}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Task Title:</label>
+    </div>
+    <div class="col-md-2 col-6 vcenter form-group">
+      {{data.taskTitle}}
+    </div>
+    <div class="display-none-large col-6">
+      <label class="gridLabel">Status:</label>
+    </div>
+    <div class="col-md-1 col-6 vcenter form-group">
+      {{data.status}}
+    </div>
+    <div class="col-md-1 col-6 vcenter form-group">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+
+        <a class="nav-link" [routerLink]="['/task/viewsingle', data._id, userId ]">View</a>
+        <a class="nav-link" [routerLink]="['/task/edittask', data._id, userId ]">Update Status</a>
+        <a class="nav-link" *ngIf="this.userRole === 'admin'" (click)="delete(data)">Detele</a>
+      </mat-menu>
+    </div>
+
+  </div> 
+
+</div>
+
+
+<mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[50, 100, 150]" [showFirstLastButtons]="true"
+  [length]="totalSize" [pageIndex]="currentPage" (page)="handlePage($event)"></mat-paginator>

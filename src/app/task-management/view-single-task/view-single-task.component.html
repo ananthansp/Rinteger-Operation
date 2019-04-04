@@ -1,0 +1,129 @@
+<div class="container-fluid">
+  <div class="row" *ngFor="let data of taskholder">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Task No:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.taskNo}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Assigned To:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.assignedTo}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Task Title</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.taskTitle}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Task Description</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable">{{data.taskDescription}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Date/Time:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.dateTime}}</label>
+          </div>
+        </div>
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Department</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.department}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Assigned By:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.assignedBy}}</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Status</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.status}}</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">To Close Date:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.toCloseDate}}</label>
+          </div>
+        </div>
+
+
+        <div class="col-md-4  col-6">
+          <div class="form-group">
+            <label class="divLable">Close Date:</label>
+          </div>
+        </div>
+        <div class="col-md-8  col-6">
+          <div class="form-group">
+            : <label class="itemLable"> {{data.closedDate}}</label>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+  <div fxFlex="100" class="mt-1">
+    <!--   <button mat-raised-button type="button" color="primary" 
+    [routerLink]="['/task/edittask',taskholder._id]">Update Status</button>          
+  <span fxFlex></span>
+  <span fxFlex></span> -->
+    <button mat-raised-button mat-button color="accent" type="button" (click)="Back()">Back</button>
+  </div>
+</div>

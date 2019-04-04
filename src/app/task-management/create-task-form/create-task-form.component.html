@@ -1,0 +1,135 @@
+<div class="container topAlignContainer">
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+   <!--  <app-ticketcustomersearch [customerModel]="customerdetail" 
+    (searchCustomer)="filterCustomer($event)"></app-ticketcustomersearch> -->
+    <!-- <div *ngFor="let customerdata of customerModel">{{customerdata.name}}{{customerdata.mobileNumber}}</div> -->
+
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="100">
+        <label class="pageBoxLg-label">Create Task Form</label>
+      </div>
+<!-- 
+      <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="taskForm.controls['name'].errors?.required" required>
+            Name
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div> -->
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="units" formControlName="units"
+           (selectionChange)="changed($event)">
+            <mat-option *ngFor="let data of units"   [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="Assigned To" formControlName="assignedTo">
+            <mat-option *ngFor="let data of taskname;let i = index " [value]="data">
+              <a>{{data.userName}}</a>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="250" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="taskTitle" placeholder="Task Title">
+          <mat-error *ngIf="taskForm.controls['taskTitle'].errors?.required" required>
+            Task Title
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="250" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="taskDescription" placeholder="Task Descrition">
+          <mat-error *ngIf="taskForm.controls['taskDescription'].errors?.required" required>
+            Task Descrition
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="priority" formControlName="priority">
+            <mat-option *ngFor="let data of priority" [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+
+    
+
+
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="department" formControlName="department">
+            <mat-option *ngFor="let data of departmentData;let i = index " [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+     
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <mat-select placeholder="Assigned By" formControlName="assignedBy">
+            <mat-option *ngFor="let data of assignedBy; let i = index " [value]="data">
+              {{data}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+
+     <!--  <div fxFlex="50" class="p-2">
+        <mat-form-field class="full-width">
+          <input matInput formControlName="status" placeholder="status">
+          <mat-error *ngIf="taskForm.controls['status'].errors?.required" required>
+            Status
+            <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div> -->
+
+
+      <div fxFlex="50" class="pr-1">
+        <mat-form-field>
+          <input matInput formControlName="toCloseDate" [matDatepicker]="picker" 
+          placeholder="Choose a close date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div fxFlex="100" class="mt-1">
+      <button mat-raised-button color="primary">Create</button>
+      <span fxFlex></span>
+      <button mat-raised-button mat-button color="accent" type="button" 
+      (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+

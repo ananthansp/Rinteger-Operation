@@ -1,0 +1,111 @@
+
+
+
+<div class="pageBoxLg">
+  <div class="container topAlignContainer ">
+    <form [formGroup]="taskForm" >
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxFlex="100">
+          <label class="pageBoxLg-label">Status Update</label>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="taskNo" [readonly]=true placeholder="Task.No" 
+            [value]="taskEdit?.taskNo || null" >  
+          </mat-form-field>
+         
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="dateTime" [readonly]=true [value]="taskEdit?.dateTime" 
+            
+              placeholder="dateTime">  
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="assignedTo" [value]="taskEdit?.assignedTo"
+            [readonly]=true
+              placeholder="assignedTo">  
+          </mat-form-field>
+        </div> 
+       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="taskTitle" [value]="taskEdit?.taskTitle"
+             [readonly]=true
+              placeholder="Task Title">  
+          </mat-form-field>
+        </div>        
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="taskDescription" [value]="taskEdit?.taskDescription"
+            [readonly]=true
+              placeholder="Task Description">  
+          </mat-form-field>
+        </div>  
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="priority" [value]="taskEdit?.priority"
+             [readonly]=true
+              placeholder="priority">  
+          </mat-form-field>
+        </div>       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="units" [value]="taskEdit?.units"
+             [readonly]=true
+              placeholder="units">  
+          </mat-form-field>
+        </div> 
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="department" [value]="taskEdit?.department"
+             [readonly]=true
+              placeholder="department">  
+          </mat-form-field>
+        </div> 
+       
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="assignedBy" [value]="taskEdit?.assignedBy"
+             [readonly]=true
+              placeholder="assignedBy">  
+          </mat-form-field>
+        </div> 
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="status" [value]="taskEdit?.status || null"
+            (ngModelChange)="taskEdit.status=$event" 
+              placeholder="Status">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="toCloseDate" [value]="taskEdit?.toCloseDate || null"
+             (ngModelChange)="taskEdit.toCloseDate=$event" 
+              placeholder="toCloseDate">
+          </mat-form-field>
+        </div>
+        <div fxFlex="50" class="pr-1">
+          <mat-form-field>
+            <input matInput formControlName="closedDate" [matDatepicker]="picker2" [value]="taskEdit?.closedDate" 
+            (ngModelChange)="taskEdit.closedDate=$event"
+             placeholder=" close date">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+              
+        <div fxFlex="100" class="mt-1">
+            <button mat-raised-button type="button" color="primary" 
+            (click)=updateTask(taskEdit)>Save</button>          
+          <span fxFlex></span>
+          <span fxFlex></span>
+          <button mat-raised-button mat-button color="accent"
+           type="button" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>

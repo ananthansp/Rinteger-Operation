@@ -1,0 +1,223 @@
+<form novalidate style="padding-top:20px" 
+ [formGroup]="singleWorkorderDetailsForm" >
+  <label class="pageBoxLg-label">Work Order Details</label>
+  <div class="pageBoxLg" *ngFor="let data of workOrder; let i = index">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Customer ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.customerID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.customerName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company Name</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.companyName}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Company Address</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.companyAddress}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Mobile Number</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.mobileNumber}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">WorkOrder ID</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.workOrderID}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Unit</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.leadUnit}}</label>
+            </div>
+          </div>
+          <div class="col-md-4  col-6">
+            <div class="form-group">
+              <label class="divLable">Date</label>
+            </div>
+          </div>
+          <div class="col-md-8  col-6">
+            <div class="form-group">
+              : <label class="itemLable">{{data?.date | date: 'dd/MM/yyyy' }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-group">
+          <label class="labelHeader">Requirements</label>
+        </div>
+      </div>
+      <div class="row gridRowHeader display-none-small">
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Item</label>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Quantity</label>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Price</label>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Discount</label>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Description</label>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label>Total</label>
+          </div>
+        </div>
+      </div>
+      <div class="row gridRow" *ngFor="let reqData of workOrder[i].requirements; let i = index">
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Item:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{reqData.item}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Quantity:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+            {{reqData.quantity}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Price:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+            {{reqData.price}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Discount:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+            {{reqData.discount}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Description:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+          {{reqData.description}}
+        </div>
+        <div class="display-none-large col-6">
+          <label class="gridLabel">Total:</label>
+        </div>
+        <div class="col-md-2 col-6 vcenter form-group">
+            {{reqData.total}}
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-8 col-4  form-group">
+            
+          </div>
+          <div class="col-md-4 col-8 form-group">
+            <div class="row pageBoxSmall">
+               <div  class="col-md-6 col-6 form-group">Sub Total</div>
+               <div class="col-md-6 col-6 form-group">: {{data.subTotal}}</div>
+               <div  class="col-md-6 col-6 form-group">Tax</div>
+               <div class="col-md-6 col-6 form-group">: {{data.tax}}</div>
+               <div  class="col-md-6 col-6 form-group">Total</div>
+               <div class="col-md-6 col-6 form-group">: {{data.allTotal}}</div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- <app-view-requirements [requirementsData]="workOrder?.requirements" [subTotal]="workOrder?.subTotal" [allTotal]="workOrder?.allTotal"
+      [tax]="workOrder?.tax"></app-view-requirements> -->
+    <!--   <div class="col-md-6" >
+   
+    <div class="col-md-6" >
+        <label class="pr-2 " *ngFor="let terms of TypesOfTerms">
+            <input type="radio" formControlName="termsType" [value]="terms">&nbsp;&nbsp;{{ terms}}
+          </label>
+      <mat-form-field>
+        <mat-select #tempVal placeholder="Select the template"  >
+          <mat-option  *ngFor="let val of templates" [value]="val"  >
+          {{val}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    </div> -->
+    <div class="row">
+      <div class="col-md-10">
+        <app-generate-pdf
+      [workOrderDetails]="workOrder"
+      [companyDetails]="workOrderPDFModel"
+      [customer]="customerModel"
+      ></app-generate-pdf>
+      </div>
+      <div class="col-md-2">
+        <div class="mt-5 pt-5">
+        <button mat-raised-button  type="button"
+        color="accent"
+         (click)="cancelWorkorder()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
